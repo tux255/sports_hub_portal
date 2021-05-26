@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  resources :articles
   devise_for :users
-  root 'main#index'
+
+  resources :articles
+  root 'articles#index' # same as root to: 'articles#index'
 end

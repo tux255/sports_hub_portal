@@ -9,11 +9,11 @@
         <li><% link_to 'Home', root_path %></li>
         <ul class="nav navbar-nav pull-right flex-row">
           <% if user_signed_in? %>
-            <li><%= current_user.email %></li>
+            <li><%= current_user.name %></li>
             <li><%= link_to 'Log out', destroy_user_session_path, method: :delete %></li>
           <% else %>
             <li class='d-flex align-items-center px-4'>Don’t have an account?</li>
-            <li><%= button_to 'Get Started', new_user_registration_path, class: 'btn btn-outline-primary px-3 py-2 rounded-0' %></li>
+            <li><%= link_to 'Get Started', new_user_registration_path, class: 'btn btn-outline-primary px-3 py-2 rounded-0' %></li>
           <% end %>
         </ul>
       </ul>

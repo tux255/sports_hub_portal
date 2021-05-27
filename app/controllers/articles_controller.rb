@@ -21,8 +21,12 @@ class ArticlesController < ApplicationController
 
   # POST /articles
   def create
-    @article = Article.new(article_params)
-    @article.user = current_user
+    #------------------------------------ was
+    # @article = Article.new(article_params)
+    # @article.user = current_user
+    # authorize @article
+    #------------------------------------- become
+    @article = current_user.articles.new(article_params)
     authorize @article
 
     respond_to do |format|

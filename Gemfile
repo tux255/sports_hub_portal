@@ -63,3 +63,5 @@ gem 'devise', '~> 4.8'
 gem 'bootstrap', '~> 5.0'
 
 gem 'pundit', '~> 2.1'
+
+gem 'font-awesome-rails', '~> 4.6', '>= 4.6.3.1'

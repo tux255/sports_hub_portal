@@ -1,19 +1,19 @@
-<nav class="navbar navbar-inverse">
-  <div class="container">
-    <div class="navbar-header">
-      <%= link_to 'Sports Blog', root_path, class: 'navbar-brand' %>
+<nav class="navbar navbar-inverse p-0 position-absolute justify-content-between w-100">
+  <div class="container-fluid p-0">
+    <div class="navbar-header px-5 py-3">
+      <%= link_to 'Sports Blog', root_path, class: 'navbar-brand m-0' %>
     </div>
     <div id="navbar">
 
       <ul class="nav navbar-nav pull-right">
         <li><% link_to 'Home', root_path %></li>
-        <ul class="nav navbar-nav pull-right">
+        <ul class="nav navbar-nav pull-right flex-row">
           <% if user_signed_in? %>
-            <li><%= current_user.email %></li>
+            <li><%= current_user.name %></li>
             <li><%= link_to 'Log out', destroy_user_session_path, method: :delete %></li>
           <% else %>
-            <li><%= link_to 'Log In', new_user_session_path %></li>
-            <li><%= link_to 'Sign Up', new_user_registration_path %></li>
+            <li class='d-flex align-items-center px-4'>Don’t have an account?</li>
+            <li><%= link_to 'Get Started', new_user_registration_path, class: 'btn btn-outline-primary px-3 py-2 rounded-0' %></li>
           <% end %>
         </ul>
       </ul>

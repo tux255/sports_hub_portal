@@ -14,9 +14,4 @@ class User < ApplicationRecord
   def set_default_role
     self.role ||= :user
   end
-
-  def create
-    @user = User.new(params[:user].permit(:id, :email, :password, :role))
-    @user.save
-  end
 end

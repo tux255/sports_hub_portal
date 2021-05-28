@@ -3,7 +3,8 @@ class ArticlesController < ApplicationController
 
   # GET /articles
   def index
-    @articles = Article.all
+    @articles = Article.all.where(published: true)
+    @current_user = current_user
     authorize @articles
   end
 

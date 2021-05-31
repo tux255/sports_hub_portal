@@ -3,12 +3,14 @@ class ArticlesController < ApplicationController
 
   # GET /articles
   def index
-    @articles = Article.all
+    @articles = policy_scope(Article)
     authorize @articles
   end
 
   # GET /articles/1
-  def show; end
+  def show
+    @article = Article.find_by(id: params[:id])
+  end
 
   # GET /articles/new
   def new
@@ -21,11 +23,6 @@ class ArticlesController < ApplicationController
 
   # POST /articles
   def create
-    #------------------------------------ was
-    # @article = Article.new(article_params)
-    # @article.user = current_user
-    # authorize @article
-    #------------------------------------- become
     @article = current_user.articles.new(article_params)
     authorize @article
 

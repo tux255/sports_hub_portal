@@ -1,6 +1,16 @@
 Rails.application.routes.draw do
-  devise_for :users
-
-  resources :articles
   root 'articles#index' # same as root to: 'articles#index'
+
+  devise_for :users
+  # TODO: change sign paths
+  # as :user do
+  #   get 'signin', to: 'devise/sessions#new'
+  #   get 'signup', to: 'devise/registrations#new'
+  #   delete 'signout', to: 'devise/sessions#destroy'
+  # end
+  resources :articles, only: %i[show index]
+
+  namespace :admin do
+    resources :users, only: %i[new edit create]
+  end
 end

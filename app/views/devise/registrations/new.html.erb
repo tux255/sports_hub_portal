@@ -20,6 +20,11 @@
           <%= render "devise/shared/error_messages", resource: resource %>
 
           <div class="field-group pt-3">
+            <%= f.label :name, class: 'text-secondary small' %>
+            <%= f.text_field :name, class: 'form-control rounded-0' %>
+          </div>
+
+          <div class="field-group pt-3">
             <%= f.label :email, class: 'text-secondary small' %>
             <%= f.email_field :email, autofocus: true, autocomplete: "email", class:'form-control rounded-0' %>
           </div>

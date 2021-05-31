@@ -28,7 +28,7 @@ class ArticlePolicy < ApplicationPolicy
     end
 
     def resolve
-      if user.admin?
+      if user.try(:admin?)
         scope.all
       else
         scope.where(published: true)

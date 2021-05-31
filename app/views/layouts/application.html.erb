@@ -8,14 +8,14 @@
   </head>
 
   <body>
-    <%= render "layouts/navigation" %>
+    <%= render user_signed_in? ? 'layouts/navigation' : 'layouts/sign_navigation' %>
+    <div class="container-fluid">
+      <%= yield %>
+    </div>
     <div id="flash">
       <% flash.each do |key, value| %>
         <div class="alert alert-danger <%= key %>"><%= value %></div>
       <% end %>
-    </div>
-    <div class="container-fluid">
-      <%= yield %>
     </div>
   </body>
 </html>

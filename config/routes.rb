@@ -8,6 +8,9 @@ Rails.application.routes.draw do
   #   get 'signup', to: 'devise/registrations#new'
   #   delete 'signout', to: 'devise/sessions#destroy'
   # end
+  resources :articles, only: %i[show index]
 
-  resources :articles
+  namespace :admin do
+    resources :users, only: %i[new edit create]
+  end
 end

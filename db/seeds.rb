@@ -3,16 +3,17 @@
 #
 require 'faker'
 
-user = CreateAdminService.new.call
-puts 'CREATED ADMIN USER: ' << user.email
+User.create(name: 'Administrator', password: 'aqwe123', email: 'tux255@gmail.com', role: 'admin')
+puts 'CREATED ADMIN USER'
 
-10.times do |_index|
+3.times do |_index|
   user_name = Faker::Name.name
   user_email = Faker::Internet.email
   u = User.create(name: user_name, password: 'aqwe123', email: user_email)
 
   rand(10).times do
-    u.articles.create(title: Faker::Lorem.sentence(word_count: 3), body: Faker::Lorem.sentences(number: 2))
+    u.articles.create(title: Faker::Lorem.sentence(word_count: 3), body: Faker::Lorem.sentence(word_count: 10),
+                      published: [true, false].sample)
   end
 
   puts "CREATED USER #{user_email} WITH #{u.articles.count} ARTICLES"

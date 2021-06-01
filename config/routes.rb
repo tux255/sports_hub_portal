@@ -8,9 +8,15 @@ Rails.application.routes.draw do
   #   get 'signup', to: 'devise/registrations#new'
   #   delete 'signout', to: 'devise/sessions#destroy'
   # end
+
   resources :articles, only: %i[show index]
 
   namespace :admin do
-    resources :users, only: %i[new edit create]
+    resources :users do
+      post :lock_access, on: :member
+      post :unlock_access, on: :member
+    end
+    # get 'surveys', to: 'surveys#index'
+    # post 'users/lock_access', to: 'users#lock_access'
   end
 end

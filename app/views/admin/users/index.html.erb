@@ -1,0 +1,8 @@
+<div class="container">
+  <h3><%= controller_name.titleize %></h3>
+  <% @users.each do |user| %>
+    <div class="row">
+      <%= render user %>
+    </div>
+  <% end %>
+</div>

@@ -1,8 +1,9 @@
 module Admin
   class SurveysController < ApplicationController
-    before_action :authenticate_user!
-    after_action :verify_authorized
+    layout 'admin/admin_layout'
 
-    def index; end
+    def show
+      @surveys = 'surveys content'
+    end
   end
 end

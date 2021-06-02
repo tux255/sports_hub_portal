@@ -3,6 +3,8 @@ module Admin
     before_action :authenticate_user!
     after_action :verify_authorized
 
+    layout 'admin/admin_layout'
+
     def index
       @users = User.all
       authorize User

@@ -1,22 +1,28 @@
 Rails.application.routes.draw do
-  root 'articles#index' # same as root to: 'articles#index'
-
   devise_for :users
-  # TODO: change sign paths
-  # as :user do
-  #   get 'signin', to: 'devise/sessions#new'
-  #   get 'signup', to: 'devise/registrations#new'
-  #   delete 'signout', to: 'devise/sessions#destroy'
-  # end
+  root 'articles#index' # same as root to: 'articles#index'
 
   resources :articles, only: %i[show index]
 
+  # get 'page/:name' => 'page#show'
+
   namespace :admin do
-    resources :users do
-      post :lock_access, on: :member
-      post :unlock_access, on: :member
-    end
-    # get 'surveys', to: 'surveys#index'
-    # post 'users/lock_access', to: 'users#lock_access'
+    # Admin pages here
+    root 'home#show'
+
+    get 'surveys' => 'surveys#show'
+    get 'banners' => 'banners#show'
+    get 'languages' => 'languages#show'
+    get 'footer' => 'footer#show'
+    get 'social-networks' => 'social_networks#show'
+    get 'users' => 'users#index'
+    get 'ia' => 'ia#show'
+    get 'teams' => 'teams#show'
+    get 'partners-news' => 'partners_news#show'
+    get 'advertising' => 'advertising#show'
+
+    # Devise lock/unlock user actions
+    post :lock_accessr
+    post :unlock_access
   end
 end

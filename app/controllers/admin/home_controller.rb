@@ -1,7 +1,5 @@
 module Admin
-  class HomeController < ApplicationController
-    layout 'admin/admin_layout'
-
+  class HomeController < Admin::BaseController
     def show
       @home_content = 'some home content'
     end

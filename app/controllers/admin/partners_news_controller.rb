@@ -1,7 +1,5 @@
 module Admin
-  class PartnersNewsController < ApplicationController
-    layout 'admin/admin_layout'
-
+  class PartnersNewsController < Admin::BaseController
     def show
       @partners_news = 'news will be here'
     end

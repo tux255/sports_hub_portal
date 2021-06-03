@@ -1,7 +1,5 @@
 module Admin
-  class BannersController < ApplicationController
-    layout 'admin/admin_layout'
-
+  class BannersController < Admin::BaseController
     def show
       @banners = 'banners here'
     end

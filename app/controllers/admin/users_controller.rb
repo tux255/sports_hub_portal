@@ -1,9 +1,7 @@
 module Admin
-  class UsersController < ApplicationController
+  class UsersController < Admin::BaseController
     before_action :authenticate_user!
     after_action :verify_authorized
-
-    layout 'admin/admin_layout'
 
     def index
       @users = User.all

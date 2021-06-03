@@ -1,7 +1,5 @@
 module Admin
-  class SocialNetworksController < ApplicationController
-    layout 'admin/admin_layout'
-
+  class SocialNetworksController < Admin::BaseController
     def show
       @social_networks = 'social networks here'
     end

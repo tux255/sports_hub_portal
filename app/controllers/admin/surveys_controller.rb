@@ -1,7 +1,5 @@
 module Admin
-  class SurveysController < ApplicationController
-    layout 'admin/admin_layout'
-
+  class SurveysController < Admin::BaseController
     def show
       @surveys = 'surveys content'
     end

@@ -1,7 +1,5 @@
 module Admin
-  class LanguagesController < ApplicationController
-    layout 'admin/admin_layout'
-
+  class LanguagesController < Admin::BaseController
     def show
       @languages = 'few languages here'
     end

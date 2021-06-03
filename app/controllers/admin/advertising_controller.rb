@@ -1,7 +1,5 @@
 module Admin
-  class AdvertisingController < ApplicationController
-    layout 'admin/admin_layout'
-
+  class AdvertisingController < Admin::BaseController
     def show
       @advertising = 'manage ads here'
     end

@@ -1,7 +1,5 @@
 module Admin
-  class IaController < ApplicationController
-    layout 'admin/admin_layout'
-
+  class IaController < Admin::BaseController
     def show
       @ia = 'some ia no idea what is ia'
     end

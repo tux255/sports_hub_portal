@@ -1,7 +1,5 @@
 module Admin
-  class TeamsController < ApplicationController
-    layout 'admin/admin_layout'
-
+  class TeamsController < Admin::BaseController
     def show
       @teams = 'teams will live here'
     end

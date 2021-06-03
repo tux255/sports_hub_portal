@@ -1,5 +1,9 @@
-class ArticlePolicy < ApplicationPolicy
+class PostPolicy < ApplicationPolicy
   def index?
+    true
+  end
+
+  def show?
     true
   end
 
@@ -8,16 +12,16 @@ class ArticlePolicy < ApplicationPolicy
   end
 
   def update?
-    return true if user.present? && user == article.user
+    return true if user.present? && user == post.user
   end
 
   def destroy?
-    return true if user.present? && user == article.user
+    return true if user.present? && user == post.user
   end
 
   private
 
-  def article
+  def post
     record
   end
 

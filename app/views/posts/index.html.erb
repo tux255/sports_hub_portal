@@ -9,12 +9,12 @@
   </thead>
 
   <tbody>
-    <% @articles.each do |article| %>
+    <% @posts.each do |post| %>
     <tr>
-      <td><%= article.title %></td>
-      <td><%= article.body %></td>
-      <td><%= article.published %></td>
-      <td><%= link_to 'Show', article %></td>
+      <td><%= post.title %></td>
+      <td><%= post.body %></td>
+      <td><%= post.published %></td>
+      <td><%= link_to 'Show', post %></td>
     </tr>
     <% end %>
   </tbody>

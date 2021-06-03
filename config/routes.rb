@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users
-  root 'articles#index' # same as root to: 'articles#index'
+  root 'posts#index'
 
-  resources :articles, only: %i[show index]
+  resources :posts, only: %i[show index]
 
   # get 'page/:name' => 'page#show'
 

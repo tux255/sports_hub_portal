@@ -1,15 +1,35 @@
 <div class="row">
   <ul>
     <li><%= link_to 'Home', admin_root_path %></li>
-    <li><%= link_to 'Surveys', admin_surveys_path %></li>
-    <li><%= link_to 'Banners', admin_banners_path %></li>
-    <li><%= link_to 'Languages', admin_languages_path %></li>
-    <li><%= link_to 'Footer', admin_footer_path %></li>
-    <li><%= link_to 'Social Networks', admin_social_networks_path %></li>
-    <li><%= link_to 'Users', admin_users_path %></li>
-    <li><%= link_to 'IA', admin_ia_path %></li>
-    <li><%= link_to 'Teams', admin_teams_path %></li>
-    <li><%= link_to 'News Partners', admin_partners_news_path %></li>
-    <li><%= link_to 'Advertising', admin_advertising_path %></li>
+    <li><%= link_to admin_surveys_path, { title: 'Surveys' } do %>
+      <i class="fa fa-pie-chart" aria-hidden="true"></i>
+    <% end %></li>
+    <li><%= link_to admin_banners_path, { title: 'Banners' } do %>
+      <i class="fa fa-picture-o" aria-hidden="true"></i>
+    <% end %></li>
+    <li><%= link_to admin_languages_path, { title: 'Languages' } do %>
+      <i class="fa fa-language" aria-hidden="true"></i>
+    <% end %></li>
+    <li><%= link_to admin_footer_path, { title: 'Footer' } do %>
+      <i class="fa fa-th-large" aria-hidden="true"></i>
+    <% end %></li>
+    <li><%= link_to admin_social_networks_path, { title: 'Social Networks' } do %>
+      <i class="fa fa-share-alt" aria-hidden="true"></i>
+    <% end %></li>
+    <li><%= link_to admin_users_path, { title: 'Users' } do %>
+      <i class="fa fa-user" aria-hidden="true"></i>
+    <% end %></li>
+    <li><%= link_to admin_ia_path, { title: 'IA' } do %>
+      <i class="fa fa-sitemap" aria-hidden="true"></i>
+    <% end %></li>
+    <li><%= link_to admin_teams_path, { title: 'Teams' } do %>
+      <i class="fa fa-users" aria-hidden="true"></i>
+    <% end %></li>
+    <li><%= link_to admin_partners_news_path, { title: 'News Partners'  } do %>
+      <i class="fa fa-handshake-o" aria-hidden="true"></i>
+    <% end %></li>
+    <li><%= link_to admin_advertising_path, { title: 'Advertising' } do %>
+      <i class="fa fa-optin-monster" aria-hidden="true"></i>
+    <% end %></li>
   </ul>
 </div>

@@ -12,9 +12,9 @@ puts 'CREATED ADMIN USER'
   u = User.create(name: user_name, password: 'aqwe123', email: user_email)
 
   rand(10).times do
-    u.articles.create(title: Faker::Lorem.sentence(word_count: 3), body: Faker::Lorem.sentence(word_count: 10),
-                      published: [true, false].sample)
+    u.posts.create(title: Faker::Lorem.sentence(word_count: 3), body: Faker::Lorem.sentence(word_count: 10),
+                   published: [true, false].sample)
   end
 
-  puts "CREATED USER #{user_email} WITH #{u.articles.count} ARTICLES"
+  puts "CREATED USER #{user_email} WITH #{u.posts.count} ARTICLES"
 end

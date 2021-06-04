@@ -31,11 +31,8 @@ module Admin
       redirect_to admin_users_path, notice: 'User deleted.'
     end
 
-    def secure_params
-      params.require(:user).permit(:role)
-    end
-
     def lock_access
+      byebug
       user = User.find(params[:id])
       authorize user
       user.lock_access!({ send_instructions: false })
@@ -47,6 +44,12 @@ module Admin
       authorize user
       user.unlock_access!
       redirect_to admin_users_path, notice: 'User unlocked.'
+    end
+
+    private
+
+    def secure_params
+      params.require(:user).permit(:role)
     end
   end
 end

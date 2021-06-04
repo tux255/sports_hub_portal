@@ -1,0 +1,14 @@
+<% @surveys.each do |survey| %>
+  <div>
+    <h3><%= survey.question %></h3>
+    <% survey.survey_answers.each do |answer| %>
+      <div>
+        <%= answer.answer %>
+        <%= link_to 'Vote', admin_survey_vote_path(id:survey.id,answer_id: answer.id), method: :post %>
+        <%= answer.votes %>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+
+<%= link_to 'Add Survey', new_admin_survey_path %>

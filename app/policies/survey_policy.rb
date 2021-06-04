@@ -1,5 +1,9 @@
-eclass SurveyPolicy < ApplicationPolicy
+class SurveyPolicy < ApplicationPolicy
   def index?
+    user.admin?
+  end
+
+  def vote?
     user.admin?
   end
 

@@ -10,7 +10,10 @@ Rails.application.routes.draw do
     # Admin pages here
     root 'home#show'
 
-    get 'surveys' => 'surveys#show'
+    resources :surveys
+    # get 'surveys' => 'surveys#show'
+    post 'surveys/vote' => 'surveys#vote', as: 'survey_vote'
+
     get 'banners' => 'banners#show'
     get 'languages' => 'languages#show'
     get 'footer' => 'footer#show'
@@ -21,8 +24,10 @@ Rails.application.routes.draw do
     get 'partners-news' => 'partners_news#show'
     get 'advertising' => 'advertising#show'
 
+    resources :users, only: %i[index show]
+
     # Devise lock/unlock user actions
-    post :lock_accessr
+    post :lock_access
     post :unlock_access
   end
 end

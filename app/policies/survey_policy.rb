@@ -1,6 +1,5 @@
-class SurveyPolicy < ApplicationPolicy
+eclass SurveyPolicy < ApplicationPolicy
   def index?
-    beybug
     user.admin?
   end
 

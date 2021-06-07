@@ -6,12 +6,11 @@ module Admin
 
     def new
       @survey = Survey.new
+      @survey.survey_answers << SurveyAnswer.new
     end
 
     def create
-      byebug
       @survey = Survey.new(survey_params)
-      # params = { survey: { question: 'Is it?', survey_answers_attributes: [{ answer: 'It is!' }] } }
 
       redirect_to admin_surveys_path, notice: 'Survey successfully created' if @survey.save
     end
@@ -22,13 +21,19 @@ module Admin
 
     def vote
       @answer = Survey.find(params[:id]).survey_answers.find(params[:answer_id])
-      @answer.update(votes: @answer.votes.to_i + 1)
+      redirect_to admin_surveys_path if @answer.update(votes: @answer.votes.to_i + 1)
+    end
+
+    def destroy
+      @survey.destroy if @survey = Survey.find(params[:id])
+
+      redirect_to admin_surveys_path, notice: 'Survey successfully deleted'
     end
 
     private
 
     def survey_params
-      params.require(:survey).permit(:question, :survey_answers)
+      params.require(:survey).permit(:question, survey_answers_attributes: {})
     end
   end
 end

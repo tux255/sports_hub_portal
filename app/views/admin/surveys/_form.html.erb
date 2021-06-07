@@ -1,8 +1,7 @@
-<%= form_for([:admin,survey]) do |f| %>
+<%= form_for [:admin,survey] do |f| %>
   <% if survey.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(survey.errors.count, "error") %> prohibited this survey from being saved:</h2>
-
       <ul>
       <% survey.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -16,8 +15,8 @@
     <%= f.text_field :question %>
   </div>
 
-  <%= f.fields_for :survey_answers do |answers| %>
-    <%= answers.text_field :answer %>
+  <%= f.fields_for :survey_answers do |answers_form| %>
+    <%= answers_form.text_field :answer %>
   <% end %>
 
 

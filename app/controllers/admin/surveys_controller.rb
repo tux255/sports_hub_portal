@@ -2,6 +2,8 @@ module Admin
   class SurveysController < Admin::BaseController
     def index
       @surveys = Survey.all
+
+      @survey = Survey.find(params['survey_id']) if params.key?(:survey_id)
     end
 
     def new
@@ -20,13 +22,14 @@ module Admin
     end
 
     def vote
-      @answer = Survey.find(params[:id]).survey_answers.find(params[:answer_id])
-      redirect_to admin_surveys_path if @answer.update(votes: @answer.votes.to_i + 1)
+      @answer = SurveyAnswer.find(params[:answer_id])
+      redirect_to admin_surveys_path if @answer.increment(:votes)
     end
 
     def destroy
-      @survey.destroy if @survey = Survey.find(params[:id])
+      return unless @survey = Survey.find(params[:id])
 
+      @survey.destroy
       redirect_to admin_surveys_path, notice: 'Survey successfully deleted'
     end
 

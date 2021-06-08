@@ -1,17 +1,83 @@
-<% @surveys.each do |survey| %>
-  <div class="row">
-    <h3 class="col-12"><%= survey.question %></h3>
-    <div class="col-12">
-      <% survey.survey_answers.each do |answer| %>
-        <div class="row">
-          <%= answer.answer %>
-          <%= answer.votes %>
-          <%= link_to 'Vote', admin_survey_vote_path(id:survey.id,answer_id: answer.id), method: :post %>
-        </div>
-      <% end %>
-    </div>
-    <%= link_to 'Delete Survey', admin_survey_path(id:survey.id), method: :delete %>
-  </div>
-<% end %>
+<div class="row">
+  <div class="col-8">
+    <table class="table surveys-view">
 
-<%= link_to 'Add Survey', new_admin_survey_path %>
+      <thead class="thead-light bg-light">
+        <tr>
+          <th scope="col">Question</th>
+          <th scope="col">Status</th>
+          <th scope="col">Responses</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @surveys.each do |survey| %>
+          <tr class="border">
+            <th scope="row">
+              <%= link_to survey.question, admin_surveys_path(survey_id: survey.id) %>
+            </th>
+            <td>
+              <% if survey.published %>
+                <div class="dropdown">
+                  <button class="btn btn-secondary dropdown-toggle rounded-0" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Published
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#">Close</a>
+                  </div>
+                </div>
+              <% else %>
+                <div class="dropdown">
+                  <button class="btn btn-secondary dropdown-toggle rounded-0" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Not published
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#">Publish</a>
+                  </div>
+                </div>
+              <% end %>
+            </td>
+            <td><%= survey.votes %></td>
+          </tr>
+        <% end %>
+      </tbody>
+
+    </table>
+
+    <%= link_to 'Add Survey', new_admin_survey_path %>
+
+  </div>
+
+  <div class="col-4">
+    <% if @survey %>
+      <div class="row">
+
+        <div class="col-12">
+          <%= @survey.question %>
+        </div>
+
+        <div class="col-12">
+          <% @survey.survey_answers.each do |answer| %>
+            <div class="row justify-content-between">
+
+              <div class="col-10">
+                <%= answer.answer %>
+              </div>
+
+              <div class="col-2">
+                <%= (100/@survey.votes*answer.votes).to_s + '%' %>
+              </div>
+
+            </div>
+
+            <div class="progress">
+
+              <div class="progress-bar" style="width: <%= 100/@survey.votes*answer.votes %>%" role="progressbar" aria-valuenow="<%= 100/@survey.votes*answer.votes %>" aria-valuemin="0" aria-valuemax="100"></div>
+
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

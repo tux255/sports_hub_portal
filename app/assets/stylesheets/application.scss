@@ -1,8 +1,15 @@
 $alizarin-crimson: #d72130;
 
-@import 'bootstrap';
-@import "font-awesome";
+@import 'font-awesome';
+@import "bootstrap/scss/bootstrap";
 
+.admin-side-nav {
+  .fa {
+    font-size: 2rem;
+    padding: 0.5rem 0;
+    color: #b2b2b2;
+  }
+}
 .navbar-header {
   background-color: $alizarin-crimson;
 

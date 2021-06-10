@@ -1,83 +1,29 @@
 <div class="row">
   <div class="col-8">
-    <table class="table surveys-view">
 
-      <thead class="thead-light bg-light">
-        <tr>
-          <th scope="col">Question</th>
-          <th scope="col">Status</th>
-          <th scope="col">Responses</th>
-        </tr>
-      </thead>
+    <nav>
+      <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        <a class="nav-item nav-link active" id="nav-opened-tab" data-toggle="tab" href="#nav-opened" role="tab" aria-controls="nav-opened" aria-selected="true">Opened</a>
+        <a class="nav-item nav-link" id="nav-closed-tab" data-toggle="tab" href="#nav-closed" role="tab" aria-controls="nav-closed" aria-selected="false">Closed</a>
+      </div>
+    </nav>
 
-      <tbody>
-        <% @surveys.each do |survey| %>
-          <tr class="border">
-            <th scope="row">
-              <%= link_to survey.question, admin_surveys_path(survey_id: survey.id) %>
-            </th>
-            <td>
-              <% if survey.published %>
-                <div class="dropdown">
-                  <button class="btn btn-secondary dropdown-toggle rounded-0" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Published
-                  </button>
-                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#">Close</a>
-                  </div>
-                </div>
-              <% else %>
-                <div class="dropdown">
-                  <button class="btn btn-secondary dropdown-toggle rounded-0" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Not published
-                  </button>
-                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#">Publish</a>
-                  </div>
-                </div>
-              <% end %>
-            </td>
-            <td><%= survey.votes %></td>
-          </tr>
-        <% end %>
-      </tbody>
-
-    </table>
+    <div class="tab-content" id="nav-tabContent">
+      <div class="tab-pane fade show active" id="nav-opened" role="tabpanel" aria-labelledby="nav-opened-tab">
+        <%= render partial: 'opened_surveys_table' %>
+      </div>
+      <div class="tab-pane fade" id="nav-closed" role="tabpanel" aria-labelledby="nav-closed-tab">
+        <%= render partial: 'closed_surveys_table' %>
+      </div>
+    </div>
 
     <%= link_to 'Add Survey', new_admin_survey_path %>
 
   </div>
 
   <div class="col-4">
-    <% if @survey %>
-      <div class="row">
-
-        <div class="col-12">
-          <%= @survey.question %>
-        </div>
-
-        <div class="col-12">
-          <% @survey.survey_answers.each do |answer| %>
-            <div class="row justify-content-between">
-
-              <div class="col-10">
-                <%= answer.answer %>
-              </div>
-
-              <div class="col-2">
-                <%= (100/@survey.votes*answer.votes).to_s + '%' %>
-              </div>
-
-            </div>
-
-            <div class="progress">
-
-              <div class="progress-bar" style="width: <%= 100/@survey.votes*answer.votes %>%" role="progressbar" aria-valuenow="<%= 100/@survey.votes*answer.votes %>" aria-valuemin="0" aria-valuemax="100"></div>
-
-            </div>
-          <% end %>
-        </div>
-      </div>
-    <% end %>
+    <%= if @survey
+          render partial: 'survey_preview', locals: {survey: @survey}
+        end %>
   </div>
 </div>

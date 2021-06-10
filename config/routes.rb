@@ -11,8 +11,9 @@ Rails.application.routes.draw do
     root 'home#show'
 
     resources :surveys
-    # get 'surveys' => 'surveys#show'
     post 'surveys/vote' => 'surveys#vote', as: 'survey_vote'
+    post 'surveys/close' => 'surveys#close', as: 'survey_close'
+    post 'surveys/publish' => 'surveys#publish', as: 'survey_publish'
 
     get 'banners' => 'banners#show'
     get 'languages' => 'languages#show'

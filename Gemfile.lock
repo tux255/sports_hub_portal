@@ -106,6 +106,9 @@ GEM
     erubi (1.10.0)
     factory_bot (6.2.0)
       activesupport (>= 5.0.0)
+    factory_bot_rails (6.2.0)
+      factory_bot (~> 6.2.0)
+      railties (>= 5.0.0)
     ffi (1.15.1)
     font-awesome-rails (4.7.0.7)
       railties (>= 3.2, < 7)
@@ -306,7 +309,7 @@ DEPENDENCIES
   byebug
   capybara (>= 3.26)
   devise (~> 4.8)
-  factory_bot (~> 6.2)
+  factory_bot_rails
   faker!
   font-awesome-rails (~> 4.6, >= 4.6.3.1)
   guard (~> 2.17)

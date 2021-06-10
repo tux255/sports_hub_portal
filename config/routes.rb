@@ -28,7 +28,7 @@ Rails.application.routes.draw do
     resources :users, only: %i[index show]
 
     # Devise lock/unlock user actions
-    post :lock_access
-    post :unlock_access
+    patch :lock_access
+    patch :unlock_access
   end
 end

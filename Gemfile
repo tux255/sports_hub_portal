@@ -34,6 +34,7 @@ group :development, :test do
   gem 'faker', git: 'https://github.com/faker-ruby/faker.git', branch: 'master'
   gem 'guard', '~> 2.17'
   gem 'guard-rspec', require: false
+  gem 'pry-rails', '~> 0.3.9'
   gem 'rubocop', '~> 1.15'
 end
 
@@ -62,8 +63,6 @@ end
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 gem 'devise', '~> 4.8'
-
-gem 'bootstrap', '~> 5.0'
 
 gem 'pundit', '~> 2.1'
 

@@ -1,0 +1,28 @@
+<div class="container-fluid">
+  <div class="row">
+
+    <nav class="navbar navbar-inverse p-0 justify-content-between w-100">
+      <div class="navbar-header px-5 py-3">
+        <%= link_to 'Sports Blog', root_path, class: 'navbar-brand m-0' %>
+      </div>
+
+      <div id="navbar">
+        <ul class="nav navbar-nav pull-right flex-row">
+          <% if user_signed_in? %>
+            <li><%= current_user.name %></li>
+            <li><%= link_to 'Log out', destroy_user_session_path, method: :delete %></li>
+          <% else %>
+            <li class='d-flex align-items-center px-4'>Don’t have an account?</li>
+            <li><%= link_to 'Get Started', new_user_registration_path, class: 'btn btn-outline-primary px-3 py-2 rounded-0' %></li>
+          <% end %>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="row py-2">
+      <h3><%= controller_name.titleize %></h3>
+
+      <%# <%= link_to 'Add Survey', polymorphic_path([:new,:admin, controller_name.singularize.to_sym]) %1> %>
+    </div>
+  </div>
+</div>

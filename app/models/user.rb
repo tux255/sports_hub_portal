@@ -2,12 +2,12 @@ class User < ApplicationRecord
   enum role: %i[user admin]
   after_initialize :set_default_role, if: :new_record?
 
-  has_many :articles
+  has_many :posts
 
   # Include default devise modules. Others available are:
   # :confirmable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable, :lockable
+         :recoverable, :validatable, :lockable
 
   private
 

@@ -10,16 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_28_110832) do
+ActiveRecord::Schema.define(version: 2021_06_04_134010) do
 
-  create_table "articles", force: :cascade do |t|
+  create_table "posts", force: :cascade do |t|
     t.string "title"
     t.text "body"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "user_id", null: false
     t.boolean "published"
-    t.index ["user_id"], name: "index_articles_on_user_id"
+    t.index ["user_id"], name: "index_posts_on_user_id"
+  end
+
+  create_table "survey_answers", force: :cascade do |t|
+    t.string "answer"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "survey_id", null: false
+    t.integer "votes", default: 0
+    t.index ["survey_id"], name: "index_survey_answers_on_survey_id"
+  end
+
+  create_table "surveys", force: :cascade do |t|
+    t.boolean "published"
+    t.string "question"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -34,9 +50,11 @@ ActiveRecord::Schema.define(version: 2021_05_28_110832) do
     t.string "name"
     t.decimal "failed_attempts"
     t.decimal "role"
+    t.string "unlock_token"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "articles", "users"
+  add_foreign_key "posts", "users"
+  add_foreign_key "survey_answers", "surveys"
 end

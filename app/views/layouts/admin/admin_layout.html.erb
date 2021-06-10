@@ -8,15 +8,23 @@
   </head>
 
   <body>
-    <%= render 'layouts/navigation' %>
     <div id="flash">
       <% flash.each do |key, value| %>
         <div class="alert alert-danger <%= key %>"><%= value %></div>
       <% end %>
     </div>
 
+    <%= render 'layouts/admin/admin_navigation' %>
+
     <div class="container-fluid">
-      <%= yield %>
+      <div class="row">
+        <div class="col-1">
+          <%= render 'layouts/admin/admin_side_nav'  %>
+        </div>
+        <div class="col-10">
+          <%= yield %>
+        </div>
+      </div>
     </div>
   </body>
 </html>

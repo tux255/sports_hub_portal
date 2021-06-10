@@ -3,8 +3,8 @@
 
     <nav>
       <div class="nav nav-tabs" id="nav-tab" role="tablist">
-        <a class="nav-item nav-link active" id="nav-opened-tab" data-toggle="tab" href="#nav-opened" role="tab" aria-controls="nav-opened" aria-selected="true">Opened</a>
-        <a class="nav-item nav-link" id="nav-closed-tab" data-toggle="tab" href="#nav-closed" role="tab" aria-controls="nav-closed" aria-selected="false">Closed</a>
+        <a class="nav-item nav-link active" id="nav-opened-tab" data-toggle="tab" href="#nav-opened" role="tab" aria-controls="nav-opened" aria-selected="true">Opened (<%= @opened_surveys.count %>)</a>
+        <a class="nav-item nav-link" id="nav-closed-tab" data-toggle="tab" href="#nav-closed" role="tab" aria-controls="nav-closed" aria-selected="false">Closed (<%= @closed_surveys.count %>)</a>
       </div>
     </nav>
 

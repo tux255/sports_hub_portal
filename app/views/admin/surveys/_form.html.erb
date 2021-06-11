@@ -11,25 +11,25 @@
   <% end %>
   <div class="row">
     <h3 class="col-12 bg-light">Reader poll</h3>
-    <div class="col-12">
+    <div class="col-12 mb-2 justify-content-between d-flex">
       <%= date_field("survey", "start_date") %>
       <%= date_field("survey", "end_date") %>
     </div>
   </div>
 
-  <div class="field-group mt-2">
+  <div class="field-group mb-2">
     <%= f.text_area :question, class: 'form-control', placeholder: 'Question' %>
   </div>
-  <div class="field-group mt-2" id="surveyAnswers">
+  <div class="field-group mb-2" id="surveyAnswers">
     <%= f.fields_for :survey_answers do |answers_form| %>
-      <%= answers_form.text_field :answer, class: 'form-control mt-2', placeholder: 'Answer' %>
+      <%= answers_form.text_field :answer, class: 'form-control mb-2', placeholder: 'Answer' %>
     <% end %>
   </div>
-  <div class="field-group mt-2">
+  <div class="field-group mb-2">
     <%= link_to '+ Add', '#', id:'addAnswerField', class:'btn btn-outline-primary btn-sm' %>
   </div>
 
-  <div class="field-group mt-2">
+  <div class="field-group mb-2">
     <%= link_to 'Cancel', admin_surveys_path, class: 'btn btn-outline-dark' %>
     <%= f.submit 'Save', class: 'btn btn-success' %>
   </div>

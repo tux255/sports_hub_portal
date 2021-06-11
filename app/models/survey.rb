@@ -8,6 +8,11 @@ class Survey < ApplicationRecord
   validates :start_date, presence: true
   validate :start_date_validate
 
+  validates :survey_answers, length: {
+    minimum: 2,
+    too_short: 'must have at least two answers'
+  }
+
   def start_date_validate
     errors.add(:start_date, "can't be in the past") unless start_date.present? && start_date >= Date.today
   end

@@ -15,6 +15,8 @@ RSpec.configure do |config|
   config.include Devise::Test::IntegrationHelpers, type: :request
   # Use the following instead if you are on Devise <= 4.1.1
   # config.include Devise::TestHelpers, :type => :controller
+  #
+  config.infer_spec_type_from_file_location!
 end
 
 # Requires supporting ruby files with custom matchers and macros, etc, in

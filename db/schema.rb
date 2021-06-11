@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_04_134010) do
+ActiveRecord::Schema.define(version: 2021_06_09_192351) do
 
   create_table "posts", force: :cascade do |t|
     t.string "title"
@@ -32,10 +32,13 @@ ActiveRecord::Schema.define(version: 2021_06_04_134010) do
   end
 
   create_table "surveys", force: :cascade do |t|
-    t.boolean "published"
+    t.boolean "published", default: false
     t.string "question"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "closed", default: false
+    t.date "start_date"
+    t.date "end_date"
   end
 
   create_table "users", force: :cascade do |t|

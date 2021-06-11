@@ -1,0 +1,35 @@
+<table class="table surveys-view">
+
+<thead class="thead-light bg-light">
+  <tr>
+    <th scope="col">Question</th>
+    <th scope="col">Closed date</th>
+    <th colspan="2" scope="col">Responses</th>
+  </tr>
+</thead>
+
+<tbody>
+  <% if @closed_surveys.blank? %>
+    <%= render inline: '<tr><th class="border text-center" colspan="4">Nothing here</th></tr>' %>
+  <% else %>
+    <% @closed_surveys.each do |survey| %>
+      <tr class="border">
+        <th scope="row">
+          <%= link_to survey.question, admin_surveys_path(survey_id: survey.id) %>
+        </th>
+        <td>
+          <%= survey.updated_at.strftime("%d/%m/%y") %>
+        </td>
+        <td>
+          <%= number_to_human(survey.votes, :format => '%n%u', :units => { :thousand => 'K' }) %>
+        </td>
+        <td>
+          <%= link_to admin_survey_path(id:survey.id), method: :delete do %>
+            <i class="fa fa-trash" aria-hidden="true"></i>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  <% end %>
+</tbody>
+</table>

@@ -1,19 +1,31 @@
 <div class="col-3">
   <%= user.email %>
 </div>
+
 <div class="col-2">
   <%= user.locked_at? ? 'blocked' : 'active' %>
 </div>
+
 <div class="col-3">
   <%= form_for([:admin,user]) do |f| %>
     <%= f.select(:role, User.roles.keys.map {|role| [role.titleize,role]}) %>
     <%= f.submit 'Change Role', :class => 'button-xs' %>
   <% end %>
 </div>
+
 <div class="col-2">
-  <%= link_to('Lock', admin_lock_access_path(user), :data => { :confirm => 'Are you sure?' }, :method => :post, :class => 'button-xs') unless user == current_user %>
-  <%= link_to('Unlock', admin_lock_access_path(user), :data => { :confirm => 'Are you sure?' }, :method => :post, :class => 'button-xs') unless user == current_user %>
+  <%= link_to('Lock',
+              admin_lock_access_path(user),
+              data: { confirm: 'Are you sure?' },
+              method: :patch,
+              class: 'button-xs') unless user == current_user %>
+  <%= link_to('Unlock',
+              admin_lock_access_path(user),
+              data: { confirm: 'Are you sure?' },
+              method: :patch,
+              class: 'button-xs') unless user == current_user %>
 </div>
+
 <div class="col-2">
   <%= link_to("Delete", admin_user_path(user), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'button-xs') unless user == current_user %>
 </div>

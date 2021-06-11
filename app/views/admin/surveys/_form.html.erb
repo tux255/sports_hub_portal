@@ -3,24 +3,34 @@
     <div id="error_explanation">
       <h2><%= pluralize(survey.errors.count, "error") %> prohibited this survey from being saved:</h2>
       <ul>
-      <% survey.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
+        <% survey.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :question %>
-    <%= f.text_field :question %>
+  <div class="row">
+    <h3 class="col-12 bg-light">Reader poll</h3>
+    <div class="col-12">
+      <%= date_field("survey", "start_date") %>
+      <%= date_field("survey", "end_date") %>
+    </div>
   </div>
 
-  <%= f.fields_for :survey_answers do |answers_form| %>
-    <%= answers_form.text_field :answer %>
-  <% end %>
+  <div class="field-group mt-2">
+    <%= f.text_area :question, class: 'form-control', placeholder: 'Question' %>
+  </div>
+  <div class="field-group mt-2" id="surveyAnswers">
+    <%= f.fields_for :survey_answers do |answers_form| %>
+      <%= answers_form.text_field :answer, class: 'form-control mt-2', placeholder: 'Answer' %>
+    <% end %>
+  </div>
+  <div class="field-group mt-2">
+    <%= link_to '+ Add', '#', id:'addAnswerField', class:'btn btn-outline-primary btn-sm' %>
+  </div>
 
-
-  <div class="actions">
-    <%= f.submit %>
+  <div class="field-group mt-2">
+    <%= link_to 'Cancel', admin_surveys_path, class: 'btn btn-outline-dark' %>
+    <%= f.submit 'Save', class: 'btn btn-success' %>
   </div>
 <% end %>

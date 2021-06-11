@@ -1,6 +1,5 @@
 <div class="container-fluid">
   <div class="row">
-
     <nav class="navbar navbar-inverse p-0 justify-content-between w-100">
       <div class="navbar-header px-5 py-3">
         <%= link_to 'Sports Blog', root_path, class: 'navbar-brand m-0' %>
@@ -19,10 +18,14 @@
       </div>
     </nav>
 
-    <div class="row py-2">
-      <h3><%= controller_name.titleize %></h3>
+    <div class="col-12">
 
-      <%# <%= link_to 'Add Survey', polymorphic_path([:new,:admin, controller_name.singularize.to_sym]) %1> %>
+      <div class="row py-2">
+        <h3><%= controller_name.titleize %></h3>
+
+        <%# <%= link_to 'Add Survey', polymorphic_path([:new,:admin, controller_name.singularize.to_sym]) %1> %>
+      </div>
+
     </div>
   </div>
 </div>

@@ -1,0 +1,48 @@
+<table class="table surveys-view">
+
+  <thead class="thead-light bg-light">
+    <tr>
+      <th scope="col">Question</th>
+      <th scope="col">Status</th>
+      <th scope="col">Responses</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% if @opened_surveys.blank? %>
+      <%= render inline: '<tr><th class="border text-center" colspan="4">Nothing here</th></tr>' %>
+    <% else %>
+      <% @opened_surveys.each do |survey| %>
+        <tr class="border">
+          <th scope="row">
+            <%= link_to survey.question, admin_surveys_path(survey_id: survey.id) %>
+          </th>
+          <td>
+            <% if survey.published %>
+              <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle rounded-0" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Published
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <%= link_to 'Close', admin_survey_close_path(survey_id: survey.id), class:'dropdown-item', method: :post %>
+                </div>
+              </div>
+            <% else %>
+              <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle rounded-0" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Not published
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <%= link_to 'Publish', admin_survey_publish_path(survey_id: survey.id),class: 'dropdown-item', method: :post %>
+                </div>
+              </div>
+            <% end %>
+          </td>
+          <td>
+            <%= number_to_human(survey.votes, :format => '%n%u', :units => { :thousand => 'K' }) %>
+          </td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>

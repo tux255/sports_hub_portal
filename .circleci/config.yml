@@ -10,9 +10,12 @@ jobs:
     executor: ruby/default
     steps:
       - checkout
-      - bundle-install/bundle-install
+      - ruby/bundle-install
       - run:
           name: Which bundler?
           command: bundle -v
-      - ruby/bundle-install
-      - ruby/rspec-test
+      - run:
+          name: Run RSpec Tests
+          command: |
+            TESTFILES=$(circleci tests glob “spec/**/*_spec.rb” |    circleci tests split)
+            bundle exec rspec — ${TESTFILES}

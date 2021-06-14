@@ -9,11 +9,16 @@ jobs:
       - image: circleci/ruby:3.0.0
     executor: ruby/default
     steps:
-      - checkout
-      - ruby/bundle-install
+      - run: 
+         name: Checkout
+         command: checkout
+      - run:
+         name: Bundle Inatall
+         command: ruby/bundle-install
       - run:
           name: Which bundler?
           command: bundle -v
+      - run: pwd
       - run:
           name: Run RSpec Tests
           command: bundle exec rspec

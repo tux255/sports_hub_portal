@@ -1,16 +1,28 @@
 require 'rails_helper'
 
 RSpec.describe 'Surveys' do
-  describe 'GET admin/surveys' do
+  describe 'GET admin/surveys#index' do
     it 'renders the index for user role admin' do
-      sign_in FactoryBot.create(:admin)
+      sign_in FactoryBot.create(:user, :admin)
 
       get '/admin/surveys'
       assert_response :success
     end
 
+    it 'redirects to home page for users with role user' do
+      sign_in FactoryBot.create(:user, :user)
+
+      get '/admin/surveys'
+      assert_response :redirect
+      follow_redirect!
+      assert_response :success
+      expect(response).to render_template('posts/index')
+    end
+  end
+
+  describe 'GET admin/surveys#new' do
     it 'should render New Survey template' do
-      sign_in FactoryBot.create(:admin)
+      sign_in FactoryBot.create(:user, :admin)
 
       get '/admin/surveys/new'
       assert_response :success
@@ -18,7 +30,7 @@ RSpec.describe 'Surveys' do
     end
 
     it 'should redirect to home page' do
-      sign_in FactoryBot.create(:user)
+      sign_in FactoryBot.create(:user, :user)
 
       get '/admin/surveys/new'
       assert_response :redirect
@@ -26,54 +38,38 @@ RSpec.describe 'Surveys' do
       assert_response :success
       expect(response).to render_template('posts/index')
     end
+  end
 
+  describe 'POST /admin/surveys#create' do
     it 'creates survey with two answers' do
-      sign_in FactoryBot.create(:admin)
-      count = Survey.all.size
-      acount = SurveyAnswer.all.size
-      params = { survey: { question: 'What is it?', start_date: Date.today, end_date: Date.tomorrow,
-                           survey_answers_attributes: [
-                             { answer: 'Do not know' },
-                             { answer: 'Something weird' }
-                           ] } }
+      sign_in FactoryBot.create(:user, :admin)
 
-      post '/admin/surveys', params: params
-
-      # TODO: Find out why post does not crate Survey
-      # Survey.create(params[:survey])
-      assert_response :success
-      expect(response).to render_template('admin/surveys/_form')
-      expect(Survey.all.size).to eq(count + 1)
-      expect(SurveyAnswer.all.size).to eq(acount + 2)
+      expect do
+        post '/admin/surveys',
+             params: {
+               survey: FactoryBot.attributes_for(:survey).merge(survey_answers_attributes: {
+                                                                  1 => FactoryBot.attributes_for(:survey_answer),
+                                                                  2 => FactoryBot.attributes_for(:survey_answer)
+                                                                })
+             }
+      end.to change { Survey.all.size }.by(1)
     end
+  end
 
+  describe 'GET /admin/surveys#edit' do
     it 'should render Edit Survey template' do
-      sign_in FactoryBot.create(:admin)
+      user = FactoryBot.create(:user, :admin)
+      sign_in user
 
-      params = { survey: { question: 'What is it?', start_date: Date.today, end_date: Date.tomorrow,
-                           survey_answers_attributes: [
-                             { answer: 'Do not know' },
-                             { answer: 'Something weird' }
-                           ] } }
+      survey = user.surveys.create(FactoryBot.attributes_for(:survey)
+        .merge(survey_answers_attributes: {
+                 1 => FactoryBot.attributes_for(:survey_answer),
+                 2 => FactoryBot.attributes_for(:survey_answer)
+               }))
 
-      # post '/admin/surveys', params: params
-      Survey.create(params[:survey])
-      get '/admin/surveys', params: { survey_id: 1 }
+      get '/admin/surveys', params: { survey_id: survey.id }
+
       expect(response).to render_template('admin/surveys/_survey_preview')
-      assert_response :success
-    end
-
-    it 'redirects to home page for users with role user' do
-      sign_in FactoryBot.create(:user)
-
-      get '/admin/surveys'
-      assert_response :redirect
-      follow_redirect!
-      assert_response :success
-      expect(response).to render_template('posts/index')
-    end
-
-    it 'adds survey' do
     end
   end
 end

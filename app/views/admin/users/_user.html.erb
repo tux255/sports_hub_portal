@@ -10,7 +10,7 @@
   <%= form_for([:admin,user]) do |f| %>
     <%= f.select(:role, User.roles.keys.map {|role| [role.titleize,role]}) %>
     <%= f.submit 'Change Role', :class => 'button-xs' %>
-  <% end %>
+  <% end unless user == current_user %>
 </div>
 
 <div class="col-2">
@@ -19,8 +19,9 @@
               data: { confirm: 'Are you sure?' },
               method: :patch,
               class: 'button-xs') unless user == current_user %>
+
   <%= link_to('Unlock',
-              admin_lock_access_path(user),
+              admin_unlock_access_path(user),
               data: { confirm: 'Are you sure?' },
               method: :patch,
               class: 'button-xs') unless user == current_user %>

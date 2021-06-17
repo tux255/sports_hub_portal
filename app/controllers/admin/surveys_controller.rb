@@ -3,8 +3,6 @@ module Admin
     def index
       @closed_surveys = policy_scope(Survey).where(closed: true)
       @opened_surveys = policy_scope(Survey).where(closed: false)
-      # @closed_surveys = Survey.where(closed: true)
-      # @opened_surveys = Survey.where(closed: false)
 
       @survey = policy_scope(Survey).find(params['survey_id']) if params.key?(:survey_id)
       authorize Survey

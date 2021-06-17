@@ -8,12 +8,14 @@ Rails.application.routes.draw do
 
   namespace :admin do
     # Admin pages here
-    root 'home#show'
+    root 'home#index'
 
     resources :surveys
     post 'surveys/vote' => 'surveys#vote', as: 'survey_vote'
     post 'surveys/close' => 'surveys#close', as: 'survey_close'
     post 'surveys/publish' => 'surveys#publish', as: 'survey_publish'
+
+    resources :categories
 
     get 'banners' => 'banners#show'
     get 'languages' => 'languages#show'

@@ -1,0 +1,6 @@
+<%= link_to 'Home', admin_root_path %>
+<% Category.top_level.each do |cat| %>
+  <%= link_to cat.title.upcase, admin_category_path(cat) %>
+<% end unless Category.blank? %>
+
+<%= link_to 'Add Category', new_admin_category_path, class:'btn btn-primary' %>

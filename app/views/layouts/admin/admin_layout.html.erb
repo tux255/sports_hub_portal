@@ -14,12 +14,15 @@
       <% end %>
     </div>
 
-    <%= render 'layouts/admin/admin_navigation' %>
+    <%= render 'layouts/admin/navigation' %>
 
     <div class="container-fluid">
+
+      <%= render 'layouts/admin/categories_nav' %>
+
       <div class="row">
         <div class="col-1">
-          <%= render 'layouts/admin/admin_side_nav'  %>
+          <%= render 'layouts/admin/side_nav'  %>
         </div>
         <div class="col-10">
           <%= yield %>

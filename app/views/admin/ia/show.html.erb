@@ -1,1 +1,12 @@
-<%= @ia %>
+<% @ia.each do |category| %>
+  <div class="row">
+    <span class="h3 col-12">
+      <%= category.title %>
+    </span>
+    <ul>
+    <% category.subcategories.all.each do |subcategory| %>
+      <li class="row"><%= subcategory.title %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>

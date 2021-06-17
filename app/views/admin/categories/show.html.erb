@@ -1,0 +1,9 @@
+<h2>Category Posts</h2>
+<% @posts.each do |post| %>
+  <%= post.title %>
+<% end unless @posts.blank? %>
+
+<h2>Sub Categories</h2>
+<% @subcategories.each do |category| %>
+  <%= category.title %>
+<% end unless @subcategories.blank? %>

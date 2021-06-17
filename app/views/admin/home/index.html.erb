@@ -1,0 +1,7 @@
+<% @home_content.each do |cat| %>
+
+  <h2><%= cat.title unless cat.subcategories.blank? %></h2<
+  <% cat.subcategories.each do |subcat| %>
+    <h4>-<%= subcat.title %></h4>
+  <% end %>
+<% end unless @home_content.blank? %>

@@ -1,10 +1,11 @@
 module Admin
   class SurveysController < Admin::BaseController
     def index
-      @closed_surveys = policy_scope(Survey).where(closed: true)
-      @opened_surveys = policy_scope(Survey).where(closed: false)
+      @closed_surveys = Survey.where(closed: true)
+      @opened_surveys = Survey.where(closed: false)
 
-      @survey = policy_scope(Survey).find(params['survey_id']) if params.key?(:survey_id)
+      @survey = Survey.find(params['survey_id']) if params.key?(:survey_id)
+
       authorize Survey
     end
 
@@ -29,10 +30,10 @@ module Admin
     end
 
     def edit
-      @closed_surveys = policy_scope(Survey).where(closed: true)
-      @opened_surveys = policy_scope(Survey).where(closed: false)
+      @closed_surveys = Survey.where(closed: true)
+      @opened_surveys = Survey.where(closed: false)
 
-      @survey = policy_scope(Survey).find(params[:id])
+      @survey = Survey.find(params[:id])
 
       authorize Survey
     end
@@ -47,7 +48,7 @@ module Admin
     end
 
     def destroy
-      return unless @survey = policy_scope(Survey).find(params[:id])
+      return unless @survey = Survey.find(params[:id])
 
       @survey.destroy
       redirect_to admin_surveys_path, notice: 'Survey successfully deleted'
@@ -61,7 +62,7 @@ module Admin
     end
 
     def close
-      if (survey = policy_scope(Survey).find(params[:survey_id]))
+      if (survey = Survey.find(params[:survey_id]))
         survey.toggle!(:closed)
       end
 

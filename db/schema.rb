@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_09_192351) do
+ActiveRecord::Schema.define(version: 2021_06_15_153911) do
 
   create_table "posts", force: :cascade do |t|
     t.string "title"
@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 2021_06_09_192351) do
     t.boolean "closed", default: false
     t.date "start_date"
     t.date "end_date"
+    t.integer "user_id", default: 1, null: false
   end
 
   create_table "users", force: :cascade do |t|

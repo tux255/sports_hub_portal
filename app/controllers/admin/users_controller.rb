@@ -32,7 +32,6 @@ module Admin
     end
 
     def lock_access
-      byebug
       user = User.find(params[:id])
       authorize user
       user.lock_access!({ send_instructions: false })

@@ -3,6 +3,7 @@ class User < ApplicationRecord
   after_initialize :set_default_role, if: :new_record?
 
   has_many :posts
+  has_many :surveys
 
   # Include default devise modules. Others available are:
   # :confirmable, :timeoutable, :trackable and :omniauthable

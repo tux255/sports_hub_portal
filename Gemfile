@@ -36,6 +36,7 @@ group :development, :test do
   gem 'guard', '~> 2.17'
   gem 'guard-rspec', require: false
   gem 'pry-rails', '~> 0.3.9'
+  gem 'rails-controller-testing'
   gem 'rspec-rails', '~> 5.0.0'
   gem 'rubocop', '~> 1.15'
 end

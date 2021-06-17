@@ -25,7 +25,7 @@ Rails.application.routes.draw do
     get 'partners-news' => 'partners_news#show'
     get 'advertising' => 'advertising#show'
 
-    resources :users, only: %i[index show]
+    resources :users
 
     # Devise lock/unlock user actions
     patch :lock_access

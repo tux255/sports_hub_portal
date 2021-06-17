@@ -6,16 +6,8 @@ RSpec.describe 'Surveys' do
       sign_in FactoryBot.create(:user, :user)
     end
 
-    it 'redirects to home page for users with role user' do
+    it 'redirects to #index' do
       get '/admin/surveys'
-      assert_response :redirect
-      follow_redirect!
-      assert_response :success
-      expect(response).to render_template('posts/index')
-    end
-
-    it 'should redirect to home page' do
-      get '/admin/surveys/new'
       assert_response :redirect
       follow_redirect!
       assert_response :success
@@ -25,10 +17,11 @@ RSpec.describe 'Surveys' do
 
   describe 'CRUD for admin/surveys as admin' do
     before(:each) do
-      sign_in FactoryBot.create(:user, :admin)
+      sign_in admin
     end
 
     let(:admin) { FactoryBot.create(:user, :admin) }
+
     let(:survey_atts) do
       FactoryBot
         .attributes_for(:survey)
@@ -61,6 +54,23 @@ RSpec.describe 'Surveys' do
       expect(
         get('/admin/surveys', params: { survey_id: survey.id })
       ).to render_template('admin/surveys/_survey_preview')
+    end
+
+    it 'persisted' do
+      question = 'what number?'
+      survey = Survey.new(
+        question: question,
+        start_date: Date.today,
+        end_date: Date.tomorrow,
+        survey_answers: [
+          FactoryBot.build(:survey_answer, answer: '1'),
+          FactoryBot.build(:survey_answer, answer: '2')
+        ]
+      )
+      expect(survey.save).to be_truthy
+      expect(survey.user_id).to eq(admin.id)
+      expect(survey.question).to eq(question)
+      expect(survey.survey_answers.pluck(:answer).sort).to eq(%w[1 2])
     end
   end
 end

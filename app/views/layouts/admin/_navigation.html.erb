@@ -6,10 +6,17 @@
       </div>
 
       <div id="navbar">
-        <ul class="nav navbar-nav pull-right flex-row">
+        <ul class="nav navbar-nav pull-right flex-row align-items-center">
           <% if user_signed_in? %>
-            <li><%= current_user.name %></li>
-            <li><%= link_to 'Log out', destroy_user_session_path, method: :delete %></li>
+            <li class="h6 align-items-center d-flex px-2 border rounded m-0 mr-2">
+              <%= link_to admin_users_path do %>
+                <img src="https://dummyimage.com/48x48/c4c4c4/000000.jpg&text=Avatar" alt="User avatar" class="rounded-circle mr-2">
+                <%= current_user.name %>
+            <% end %>
+            </li>
+            <li>
+              <%= link_to 'Log out', destroy_user_session_path, method: :delete, class:'btn btn-outline-primary' %>
+            </li>
           <% else %>
             <li class='d-flex align-items-center px-4'>Don’t have an account?</li>
             <li><%= link_to 'Get Started', new_user_registration_path, class: 'btn btn-outline-primary px-3 py-2 rounded-0' %></li>
@@ -19,13 +26,10 @@
     </nav>
 
     <div class="col-12">
-
-      <div class="row py-2">
+      <div class="row py-2 justify-content-between">
         <h3><%= controller_name.titleize %></h3>
-
-        <%# <%= link_to 'Add Survey', polymorphic_path([:new,:admin, controller_name.singularize.to_sym]) %1> %>
+        <%= content_for?(:add_item_button) ? yield(:add_item_button) : "" %>
       </div>
-
     </div>
   </div>
 </div>

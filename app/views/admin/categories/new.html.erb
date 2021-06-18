@@ -1,6 +1,10 @@
 <%= form_for :categories, url: admin_categories_path do |f| %>
-  <%= f.text_field :title, placeholder: 'Category title' %>
-  <%= f.collection_select :parent_id, Category.top_level.all,:id,:title, include_blank: true %>
+  <div class="form-groupt">
+    <%= f.text_field :title, placeholder: 'Category title' %>
+  </div>
+  <div class="form-group">
+    <%= f.collection_select :parent_id, Category.top_level.all,:id,:title, include_blank: true  %>
+  </div>
 
   <%= f.submit 'Save' %>
 <% end %>

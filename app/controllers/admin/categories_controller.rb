@@ -29,6 +29,20 @@ module Admin
       end
     end
 
+    def edit
+      @category = Category.find(params[:id])
+    end
+
+    def update
+      @category = current_user.categories.new(params[:post])
+
+      if @category.save
+        redirect_to @category
+      else
+        render :edit
+      end
+    end
+
     private
 
     def category_params

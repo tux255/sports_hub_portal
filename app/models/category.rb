@@ -8,5 +8,5 @@ class Category < ApplicationRecord
 
   scope :top_level, -> { where(parent_id: nil) }
 
-  validates_uniqueness_of :title
+  validates :title, uniqueness: true, presence: true
 end

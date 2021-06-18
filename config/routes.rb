@@ -15,6 +15,8 @@ Rails.application.routes.draw do
     post 'surveys/close' => 'surveys#close', as: 'survey_close'
     post 'surveys/publish' => 'surveys#publish', as: 'survey_publish'
 
+    resources :users
+    resources :posts
     resources :categories
 
     get 'banners' => 'banners#show'
@@ -26,8 +28,6 @@ Rails.application.routes.draw do
     get 'teams' => 'teams#show'
     get 'partners-news' => 'partners_news#show'
     get 'advertising' => 'advertising#show'
-
-    resources :users
 
     # Devise lock/unlock user actions
     patch :lock_access

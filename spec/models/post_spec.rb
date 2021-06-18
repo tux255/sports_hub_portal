@@ -15,7 +15,7 @@ RSpec.describe Post do
         .to_not be_valid
     end
 
-    it 'is not valid wothout body' do
+    it 'is not valid without body' do
       expect(@admin.posts.new(FactoryBot.attributes_for(:post, :with_no_body)))
         .to_not be_valid
     end

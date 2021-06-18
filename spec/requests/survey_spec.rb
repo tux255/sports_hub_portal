@@ -55,22 +55,5 @@ RSpec.describe 'Surveys' do
         get('/admin/surveys', params: { survey_id: survey.id })
       ).to render_template('admin/surveys/_survey_preview')
     end
-
-    it 'persisted' do
-      question = 'what number?'
-      survey = Survey.new(
-        question: question,
-        start_date: Date.today,
-        end_date: Date.tomorrow,
-        survey_answers: [
-          FactoryBot.build(:survey_answer, answer: '1'),
-          FactoryBot.build(:survey_answer, answer: '2')
-        ]
-      )
-      expect(survey.save).to be_truthy
-      expect(survey.user_id).to eq(admin.id)
-      expect(survey.question).to eq(question)
-      expect(survey.survey_answers.pluck(:answer).sort).to eq(%w[1 2])
-    end
   end
 end

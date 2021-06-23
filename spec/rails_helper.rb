@@ -7,6 +7,12 @@ abort('The Rails environment is running in production mode!') if Rails.env.produ
 require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 
+require 'action_text/system_test_helper'
+
+RSpec.configure do |config|
+  config.include ActionText::SystemTestHelper, type: :system
+end
+
 require_relative 'support/factory_bot'
 
 RSpec.configure do |config|

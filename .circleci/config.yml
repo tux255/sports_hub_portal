@@ -26,10 +26,10 @@ jobs:
       RAILS_ENV: test
     steps:
       - checkout
-      - ruby/install-deps
       - run:
           name: SQLite 3 install
           command: bundle install sqlite3
+      - ruby/install-deps
       - node/install-packages:
           pkg-manager: yarn
           cache-key: "yarn.lock"

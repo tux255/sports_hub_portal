@@ -29,7 +29,7 @@ jobs:
       - ruby/install-deps
       - run:
           name: SQLite 3 install
-          command: gem install sqlite3 -v '1.4.2' --source 'https://rubygems.org/'
+          command: bundle install sqlite3
       - node/install-packages:
           pkg-manager: yarn
           cache-key: "yarn.lock"

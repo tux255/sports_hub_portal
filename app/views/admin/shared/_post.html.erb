@@ -1,0 +1,23 @@
+<%= link_to edit_admin_post_path(post), class: 'col-8 p-2 mb-3 border d-flex' do %>
+  <div class="row">
+    <div class="col-3">
+      <%= unless post.image.blank?
+           image_tag post.image, class: 'img-fluid'
+      else
+        image_tag 'https://dummyimage.com/600x400/c4/444.jpg?text=placeholder%20600x400', class: 'img-fluid'
+      end %>
+    </div>
+    <div class="col-9">
+      <h3>
+        <%= post.title %><br/>
+      </h3>
+      <div>
+        <%= post.content %>
+      </div>
+      <div>
+        <%= 'Published: ' + post.published.to_s %>
+      </div>
+      <%= 'Category: ' + post.category.title %>
+    </div>
+  </div>
+<% end %>

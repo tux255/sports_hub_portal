@@ -1,6 +1,13 @@
-<h1>Editing Article</h1>
+<% content_for(:add_item_button) { link_to 'Add Post', new_admin_post_path, class: 'btn btn-primary' } %>
 
-<%= render 'form', post: @post %>
+<div class="row py-3">
+  <h1>Editing Article</h1>
 
-<%= link_to 'Show', @post %> |
-<%= link_to 'Back', posts_path %>
+  <%= render 'form', post: @post %>
+
+  <div class="col-12">
+    <%= link_to 'Show', @post %> |
+    <%= link_to 'Back', admin_posts_path %>
+  </div>
+
+</div>

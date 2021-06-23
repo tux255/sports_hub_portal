@@ -1,3 +1,4 @@
+<% content_for(:add_item_button) { link_to 'Add Post', new_admin_post_path, class: 'btn btn-primary' } %>
 <table class="table table-bordered table-striped table-condensed table-hover">
   <thead>
     <tr>
@@ -14,7 +15,7 @@
       <tr>
         <td style='max-width:200px'><%= image_tag post.image, class:'img-fluid' unless post.image.blank? %></td>
         <td><%= post.title %></td>
-        <td><%= post.body %></td>
+        <td><%= post.content %></td>
         <td><%= post.published %></td>
         <td><%= link_to 'Show', post, target: '_blank' %></td>
         <td><%= link_to 'Edit', edit_admin_post_path(post) %></td>

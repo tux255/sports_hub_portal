@@ -1,10 +1,9 @@
-<% content_for(:add_item_button) { link_to 'Add Category', new_admin_category_path, class: 'btn btn-primary' } %>
-<h2>Category Posts</h2>
-<% @posts.each do |post| %>
-  <%= post.title %>
-<% end unless @posts.blank? %>
-
-<h2>Sub Categories</h2>
-<% @subcategories.each do |category| %>
-  <%= category.title %>
-<% end unless @subcategories.blank? %>
+<% content_for(:add_item_button) { link_to 'Add Post', new_admin_post_path, class: 'btn btn-primary' } %>
+<div class="row py-3">
+  <h2><%= @title %></h2>
+  <div class="col-12">
+    <% @posts.each do |post| %>
+      <%= render partial: 'admin/shared/post', locals: {post: post} %>
+      <% end unless @posts.blank? %>
+  </div>
+</div>

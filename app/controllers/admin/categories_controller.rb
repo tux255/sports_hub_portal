@@ -7,9 +7,9 @@ module Admin
 
     def show
       category = Category.find(params[:id])
+      @title = category.title
 
-      @posts = category.posts
-      @subcategories = category.subcategories.all
+      @posts = category.subcategory_posts
       authorize category
     end
 

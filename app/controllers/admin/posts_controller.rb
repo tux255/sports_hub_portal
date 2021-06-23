@@ -22,9 +22,7 @@ module Admin
 
     # GET /posts/1/edit
     def edit
-      byebug
       @post = Post.find(params[:id])
-      @post.image.attach(params[:image])
     end
 
     # POST /posts
@@ -41,7 +39,11 @@ module Admin
 
     # PATCH/PUT /posts/1
     def update
-      redirect_to %i[admin edit], notice: 'Post was successfully updated' if @post.update(post_params)
+      if @post.update(post_params)
+        redirect_to %i[edit admin post], notice: 'Post was successfully updated' if @post.update(post_params)
+      else
+        redirect_to %i[edit admin post]
+      end
     end
 
     # DELETE /posts/1

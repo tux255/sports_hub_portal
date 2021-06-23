@@ -1,35 +1,47 @@
-<%= form_for [:admin,post] do |f| %>
-  <% if post.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
-      <ul>
-        <% post.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+<div class="row py-3">
+  <div class="col-8">
+    <%= form_for [:admin,post], html: {:class => 'border p-3' } do |f| %>
+      <% if post.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
+          <ul>
+            <% post.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
 
-  <% unless post.image.blank? %>
-    <%= image_tag post.image %><br/>
-  <% end %>
+      <div class="field">
+        <%= f.file_field :image %>
+      </div>
 
-  <div class="field">
-    <%= f.file_field :image %>
-  </div>
+      <div class="field">
+        <%= f.label :Category %>
+        <%= f.collection_select :category_id, Category.all, :id,:title, include_blank: true %>
+      </div>
 
-  <div class="field">
-    <%= f.label :title %>
-    <%= f.text_field :title %>
-  </div>
+      <div class="field">
+        <%= f.label :title %>
+        <%= f.text_field :title %>
+      </div>
 
-  <div class="field">
-    <%= f.label :content %>
+      <div class="field">
+        <%= f.label :content %>
 
-    <%= f.rich_text_area :content %>
-  </div>
+        <%= f.rich_text_area :content %>
+      </div>
 
-  <div class="actions">
-    <%= f.submit %>
+      <div class="actions">
+        <%= f.submit %>
+      </div>
   </div>
 <% end %>
+<div class="col-4">
+  <% unless post.image.blank? %>
+    <%= image_tag post.image, class: 'img-fluid p-2 border' %><br/>
+  <% else %>
+    <%= 'No image' %>
+  <% end %>
+</div>
+</div>

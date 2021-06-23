@@ -8,9 +8,10 @@ import Turbolinks from 'turbolinks';
 import * as ActiveStorage from '@rails/activestorage';
 import 'channels';
 
-
 require("bootstrap/dist/js/bootstrap")
 
+require("trix")
+require("@rails/actiontext")
 
 window.addEventListener('load', function() {
   console.log('content loaded');

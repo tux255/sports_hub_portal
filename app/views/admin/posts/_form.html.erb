@@ -1,8 +1,7 @@
-<%= form_for(post) do |f| %>
+<%= form_for [:admin,post] do |f| %>
   <% if post.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
-
       <ul>
         <% post.errors.full_messages.each do |message| %>
           <li><%= message %></li>
@@ -11,8 +10,12 @@
     </div>
   <% end %>
 
+  <% unless post.image.blank? %>
+    <%= image_tag post.image %><br/>
+  <% end %>
+
   <div class="field">
-    <%= f.file_field :avatar %>
+    <%= f.file_field :image %>
   </div>
 
   <div class="field">
@@ -21,8 +24,9 @@
   </div>
 
   <div class="field">
-    <%= f.label :body %>
-    <%= f.text_area :body %>
+    <%= f.label :content %>
+
+    <%= f.rich_text_area :content %>
   </div>
 
   <div class="actions">

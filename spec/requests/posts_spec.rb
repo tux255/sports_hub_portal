@@ -54,7 +54,8 @@ RSpec.describe 'Posts', type: :request do
       body = 'body content'
       new_post = user.posts.new(
         title: title,
-        body: body
+        body: body,
+        image: fixture_file_upload('test-600x400.png', 'image/png')
       )
       expect(new_post.save).to be_truthy
       expect(new_post.user_id).to eq(user.id)

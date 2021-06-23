@@ -1,23 +1,24 @@
-<% @categories.all.each do |cat| %>
-  <div class='row'>
-    <h1>
-      <%= cat.title %>
-    </h1>
-  </div>
-  <div class='row border rounded'>
-    <% cat.subcategories.each do |subcat| %>
-      <div class='col-12 border rounded'>
-        <h2>
-          <%= subcat.title %>
-        </h2>
-        <div class="row">
-          <% subcat.posts.each do |post| %>
-            <div class="col-12">
-              <%= post.title %>
-            </div>
-          <% end %>
-        </div>
-      </div>
+<table class="table table-bordered table-striped table-condensed table-hover">
+  <thead>
+    <tr>
+      <th>Thumb</th>
+      <th>Title</th>
+      <th>Body</th>
+      <th>Published</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @posts.each do |post| %>
+      <tr>
+        <td style='max-width:200px'><%= image_tag post.image, class:'img-fluid' unless post.image.blank? %></td>
+        <td><%= post.title %></td>
+        <td><%= post.body %></td>
+        <td><%= post.published %></td>
+        <td><%= link_to 'Show', post, target: '_blank' %></td>
+        <td><%= link_to 'Edit', edit_admin_post_path(post) %></td>
+      </tr>
     <% end %>
-  </div>
-<% end %>
+  </tbody>
+</table>

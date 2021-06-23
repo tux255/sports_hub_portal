@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <%= @post.image %>
+  <%= image_tag @post.image, class: 'img-fluid' %>
 </p>
 
 <p>
@@ -10,14 +10,8 @@
 </p>
 
 <p>
-  <strong>Category:</strong>
-  <%= @post.category.title unless @post.category.blank? %>
-</p>
-
-<p>
   <strong>Body:</strong>
   <%= @post.content %>
-  \opos
 </p>
 
 <%= link_to 'Back', posts_path %>

@@ -37,7 +37,8 @@ module Admin
       category = Category.find(params[:id])
 
       if category.update(category_params)
-        render :show
+        redirect_to edit_admin_category_path, notice: 'Post was successfully updated'
+
       else
         render :edit
       end

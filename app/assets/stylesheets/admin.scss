@@ -59,3 +59,11 @@ $alizarin-crimson: #d72130;
   border-color: $alizarin-crimson;
   color: $alizarin-crimson;
 }
+
+.post {
+  &:hover {
+    background-color: $white;
+    box-shadow: 0 0.5rem 1rem #c4c4c4 !important;
+    text-decoration: none;
+  }
+}

@@ -1,7 +1,7 @@
 <% content_for(:add_item_button) { link_to 'Add Post', new_admin_post_path, class: 'btn btn-primary' } %>
 
 <div class='row py-3'>
-  <h1>Editing Article</h1>
+  <h1>Editing Post</h1>
   <div class="col-12">
     <%= render 'form', post: @post %>
   </div>

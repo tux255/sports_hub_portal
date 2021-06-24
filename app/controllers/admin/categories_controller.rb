@@ -38,7 +38,6 @@ module Admin
 
       if category.update(category_params)
         redirect_to edit_admin_category_path, notice: 'Post was successfully updated'
-
       else
         render :edit
       end

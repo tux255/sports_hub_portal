@@ -29,12 +29,10 @@ RSpec.describe 'Posts', type: :request do
     end
 
     it '#create' do
-      # expect(
-      #   post(
-      #     '/admin/posts',
-      #     params: { post: FactoryBot.attributes_for(:post, user_id: user.id) }
-      #   )
-      # ).to change { Post.all.size }.by(1)
+      expect do
+        post('/admin/posts',
+             params: { post: FactoryBot.attributes_for(:post, user_id: user.id) })
+      end.to change { Post.all.size }.by(1)
     end
 
     it '#update' do
@@ -43,7 +41,7 @@ RSpec.describe 'Posts', type: :request do
     it '#destroy' do
       new_post = user.posts.new(
         title: 'post title',
-        body: 'body content'
+        content: 'body content'
       )
       expect(new_post.save).to be_truthy
       expect(new_post.destroy).to be_truthy
@@ -52,15 +50,18 @@ RSpec.describe 'Posts', type: :request do
     it 'persisted' do
       title = 'post title'
       body = 'body content'
+      image = fixture_file_upload('test-600x400.png', 'image/png')
+
       new_post = user.posts.new(
         title: title,
-        body: body,
-        image: fixture_file_upload('test-600x400.png', 'image/png')
+        content: body,
+        image: image
       )
       expect(new_post.save).to be_truthy
       expect(new_post.user_id).to eq(user.id)
       expect(new_post.title).to eq(title)
-      expect(new_post.body).to eq(body)
+      expect(new_post.content.to_plain_text).to eq(body)
+      expect(new_post.image).to be_attached
     end
   end
 end

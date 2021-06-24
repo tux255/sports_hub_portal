@@ -3,7 +3,7 @@ require 'faker'
 FactoryBot.define do
   factory :post do
     title { Faker::Lorem.sentence(word_count: 4) }
-    content { Faker::Lorem.sentences(number: 5) }
+    content { Faker::Lorem.sentence(word_count: 50) }
 
     trait :with_no_content do
       content { '' }

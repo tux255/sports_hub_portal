@@ -34,10 +34,10 @@ module Admin
     end
 
     def update
-      @category = current_user.categories.new(params[:post])
+      category = Category.find(params[:id])
 
-      if @category.save
-        redirect_to @category
+      if category.update(category_params)
+        render :show
       else
         render :edit
       end
@@ -46,7 +46,7 @@ module Admin
     private
 
     def category_params
-      params.require(:categories).permit!
+      params.require(:category).permit(:title, :parent_id)
     end
   end
 end

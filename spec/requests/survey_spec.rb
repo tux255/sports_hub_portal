@@ -1,9 +1,10 @@
 # frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'Surveys' do
   describe 'CRUD for admin/surveys as user' do
-    before(:each) do
+    before do
       sign_in FactoryBot.create(:user, :user)
     end
 
@@ -17,19 +18,14 @@ RSpec.describe 'Surveys' do
   end
 
   describe 'CRUD for admin/surveys as admin' do
-    before(:each) do
+    before do
       sign_in admin
     end
 
     let(:admin) { FactoryBot.create(:user, :admin) }
 
     let(:survey_atts) do
-      FactoryBot
-        .attributes_for(:survey)
-        .merge(survey_answers_attributes: {
-                 1 => FactoryBot.attributes_for(:survey_answer),
-                 2 => FactoryBot.attributes_for(:survey_answer)
-               })
+      FactoryBot.attributes_for(:survey)
     end
 
     it '#index' do
@@ -46,12 +42,12 @@ RSpec.describe 'Surveys' do
     it '#create' do
       expect do
         post '/admin/surveys',
-             params: { survey: survey_atts }
+             params: { survey: FactoryBot.attributes_for(:survey) }
       end.to change { Survey.all.size }.by(1)
     end
 
     it '#edit' do
-      survey = admin.surveys.create(survey_atts)
+      survey = FactoryBot.create(:survey)
       expect(
         get('/admin/surveys', params: { survey_id: survey.id })
       ).to render_template('admin/surveys/_survey_preview')

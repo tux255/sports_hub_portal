@@ -148,7 +148,7 @@ ActiveRecord::Schema.define(version: 20_210_624_135_552) do
   add_foreign_key 'banners', 'categories'
   add_foreign_key 'banners', 'users'
   add_foreign_key 'categories', 'categories', column: 'parent_id'
-  add_foreign_key 'comments', 'comment', column: 'parent_comment_id'
+  add_foreign_key 'comments', 'comments', column: 'parent_comment_id'
   add_foreign_key 'posts', 'categories'
   add_foreign_key 'posts', 'users'
   add_foreign_key 'survey_answers', 'surveys'

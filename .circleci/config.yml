@@ -26,16 +26,13 @@ jobs:
       RAILS_ENV: test
     steps:
       - checkout
-      - run:
-          name: Install SQLite3 bundle
-          command: gem install sqlite3 -v '1.4.2' --source 'https://rubygems.org/'
       - ruby/install-deps
       - node/install-packages:
           pkg-manager: yarn
           cache-key: "yarn.lock"
-      - run:
-          name: Database setup
-          command: bundle exec rails db:schema:load --trace
+      # - run:
+      #     name: Database setup
+      #     command: bundle exec rails db:schema:load --trace
       - ruby/rspec-test
 
 workflows:

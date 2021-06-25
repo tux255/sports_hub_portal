@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 class CategoryPolicy < ApplicationPolicy
   def index?
-    user.admin?
+    true
   end
 
   def show?
-    user.admin?
+    true
   end
 
   def new?

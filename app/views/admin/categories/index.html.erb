@@ -1,0 +1,4 @@
+<% @categories.each do |cat| %>
+  <%= cat.title %>
+  <%= cat.id %>
+<% end unless @categories.blank? %>

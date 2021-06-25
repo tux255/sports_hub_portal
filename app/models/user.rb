@@ -4,6 +4,7 @@ class User < ApplicationRecord
 
   has_many :posts
   has_many :surveys
+  has_many :categories
 
   # Include default devise modules. Others available are:
   # :confirmable, :timeoutable, :trackable and :omniauthable

@@ -8,12 +8,16 @@ Rails.application.routes.draw do
 
   namespace :admin do
     # Admin pages here
-    root 'home#show'
+    root 'home#index'
 
     resources :surveys
     post 'surveys/vote' => 'surveys#vote', as: 'survey_vote'
     post 'surveys/close' => 'surveys#close', as: 'survey_close'
     post 'surveys/publish' => 'surveys#publish', as: 'survey_publish'
+
+    resources :users
+    resources :posts
+    resources :categories
 
     get 'banners' => 'banners#show'
     get 'languages' => 'languages#show'
@@ -24,8 +28,6 @@ Rails.application.routes.draw do
     get 'teams' => 'teams#show'
     get 'partners-news' => 'partners_news#show'
     get 'advertising' => 'advertising#show'
-
-    resources :users
 
     # Devise lock/unlock user actions
     patch :lock_access

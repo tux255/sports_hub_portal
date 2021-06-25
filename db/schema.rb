@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_15_153911) do
+ActiveRecord::Schema.define(version: 2021_06_17_072314) do
+
+  create_table "categories", force: :cascade do |t|
+    t.string "title"
+    t.integer "parent_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id", null: false
+    t.index ["parent_id"], name: "index_categories_on_parent_id"
+  end
 
   create_table "posts", force: :cascade do |t|
     t.string "title"
@@ -19,6 +28,7 @@ ActiveRecord::Schema.define(version: 2021_06_15_153911) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "user_id", null: false
     t.boolean "published"
+    t.integer "category_id"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
@@ -59,6 +69,9 @@ ActiveRecord::Schema.define(version: 2021_06_15_153911) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "categories", "categories", column: "parent_id"
+  add_foreign_key "posts", "categories"
   add_foreign_key "posts", "users"
   add_foreign_key "survey_answers", "surveys"
+  add_foreign_key "surveys", "users"
 end

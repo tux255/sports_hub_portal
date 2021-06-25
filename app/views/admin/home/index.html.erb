@@ -1,0 +1,6 @@
+<% @home_content.each do |cat| %>
+  <h2><%= link_to cat.title, edit_admin_category_path(cat) %></h2>
+  <% cat.subcategories.each do |subcat| %>
+    <h4>-<%= link_to subcat.title, edit_admin_category_path(subcat) %></h4>
+  <% end %>
+<% end unless @home_content.blank? %>

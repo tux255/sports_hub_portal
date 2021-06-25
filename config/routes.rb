@@ -20,13 +20,13 @@ Rails.application.routes.draw do
     resources :posts
     resources :categories
     resources :banners
+    resources :teams
 
     get 'languages' => 'languages#show'
     get 'footer' => 'footer#show'
     get 'social-networks' => 'social_networks#show'
     get 'users' => 'users#index'
     get 'ia' => 'ia#show'
-    get 'teams' => 'teams#show'
     get 'partners-news' => 'partners_news#show'
     get 'advertising' => 'advertising#show'
 

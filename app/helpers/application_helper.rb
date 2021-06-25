@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module ApplicationHelper
   def image_tag_placeholder(source, options = {})
     if source.blank?

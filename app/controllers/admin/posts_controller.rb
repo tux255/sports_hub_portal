@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Admin
   class PostsController < Admin::BaseController
     before_action :set_post, only: %i[show edit update destroy]

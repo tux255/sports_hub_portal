@@ -1,0 +1,8 @@
+<% content_for(:add_item_button) { link_to 'Add Team', new_admin_team_path, class: 'btn btn-primary' } %>
+<div class="row py-3">
+  <% @teams.each do |team| %>
+    <div class="col-12">
+      <%= team.name %>
+    </div>
+  <% end %>
+</div>

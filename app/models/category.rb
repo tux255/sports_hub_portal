@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class Category < ApplicationRecord
   belongs_to :user
 
@@ -7,6 +8,7 @@ class Category < ApplicationRecord
 
   has_many :posts, foreign_key: 'category_id'
   has_many :banners
+  has_many :teams
 
   scope :top_level, -> { where(parent_id: nil) }
 

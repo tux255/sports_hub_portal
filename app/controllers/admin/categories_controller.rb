@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 module Admin
   class CategoriesController < Admin::BaseController
     def index
-      @categories = policy_scope(Category)
+      @categories = Category.all
       authorize @categories
     end
 

@@ -1,4 +1,5 @@
 require "application_system_test_case"
+# frozen_string_literal: true
 
 class ArticlesTest < ApplicationSystemTestCase
   setup do

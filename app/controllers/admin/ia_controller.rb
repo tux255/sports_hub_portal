@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Admin
   class IaController < Admin::BaseController
     def show

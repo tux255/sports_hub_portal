@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class AddStartDateAndEndDateToSurveys < ActiveRecord::Migration[6.1]
   def change
     add_column :surveys, :start_date, :date

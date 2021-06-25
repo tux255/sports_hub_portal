@@ -18,8 +18,8 @@ Rails.application.routes.draw do
     resources :users
     resources :posts
     resources :categories
+    resources :banners
 
-    get 'banners' => 'banners#show'
     get 'languages' => 'languages#show'
     get 'footer' => 'footer#show'
     get 'social-networks' => 'social_networks#show'

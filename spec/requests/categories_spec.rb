@@ -1,9 +1,10 @@
 # frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe 'Categories' do
   describe 'CRUD for admin/categories as admin' do
-    before(:each) do
+    before do
       sign_in admin
     end
 
@@ -48,7 +49,7 @@ RSpec.describe 'Categories' do
 
       test_category.reload
 
-      expect(response).to render_template('categories/show')
+      expect(response).to render_template('edit')
       expect(test_category.title).to eql 'New title'
       expect(test_category.parent_id).to eql parent_category.id
     end

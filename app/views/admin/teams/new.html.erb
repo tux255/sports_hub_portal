@@ -6,18 +6,40 @@
   <div class="col-4">
     <h3>New Team</h3>
     <%= form_for [:admin,@team], html: {class:'border p-2 rounded-0'} do |f| %>
+
+      <% if @team.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@team.errors.count, "error") %> prohibited this team from being saved:</h2>
+          <ul>
+            <% @team.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
       <div class="field-group mb-2">
         <%= f.text_field :name, placeholder: 'Team Name', class:'form-control' %>
       </div>
 
       <div class="field-group mb-2">
         <%= f.label :category %>
-        <%= f.collection_select :category_id, Category.where(parent_id:nil), :id,:title, {include_blank: true}, {class: 'custom-select'} %>
+        <%= f.select :category_id, options_for_select(Category.where(parent_id:nil).map{|t| [t.title, t.id]}), {}, {id:'categories_ignored',name:'',class:'custom-select'} %>
       </div>
 
       <div class="field-group mb-2">
         <%= f.label :subcategory %>
-        <%= f.collection_select :category_id, Category.where.not(parent_id:nil), :id,:title, {include_blank: true}, {class: 'custom-select'} %>
+        <%= f.select :category_id, options_for_select(Category.all.map{|t| [t.title, t.id]}), {}, {class:'custom-select'} %>
+      </div>
+
+      <div class="field-group mb-2">
+        <%= f.label :team_logo %>
+        <%= f.file_field :team_logo, class: 'form-control' %>
+      </div>
+
+
+      <div class="field-group mb-2">
+        <%= f.submit 'Save', class:'btn btn-primary' %>
       </div>
     <% end %>
   </div>

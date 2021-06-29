@@ -13,22 +13,45 @@ require("bootstrap/dist/js/bootstrap")
 require("trix")
 require("@rails/actiontext")
 
-window.addEventListener('load', function() {
+window.addEventListener('turbolinks:load', function() {
   console.log('content loaded');
-  let addAnswerButton = document.querySelector('#addAnswerField');
+  const addAnswerButton = document.querySelector('#addAnswerField');
   if (addAnswerButton) {
     window.answersCounter = document.querySelectorAll('[id^="survey_survey_answers_attributes_"').length;
-    let surveyAnswers = document.querySelector('#surveyAnswers');
+    const surveyAnswers = document.querySelector('#surveyAnswers');
 
     addAnswerButton.addEventListener('click', function(e) {
       e.preventDefault();
-      let line = "<input placeholder='Answer' class='form-control mt-2' type='text' name='survey[survey_answers_attributes][" + window.answersCounter + "][answer]' id='survey_survey_answers_attributes_" + window.answersCounter + "_answer'>";
+      const line = "<input placeholder='Answer' class='form-control mt-2' type='text' name='survey[survey_answers_attributes][" + window.answersCounter + "][answer]' id='survey_survey_answers_attributes_" + window.answersCounter + "_answer'>";
 
       surveyAnswers.insertAdjacentHTML('beforeend', line);
       window.answersCounter++
     })
   }
 
+
+  const CategorySelect = document.querySelector('#categories_ignored');
+  const SubCategorySelect = document.querySelector('#team_category_id')
+  if (CategorySelect && SubCategorySelect) {
+    CategorySelect.addEventListener('change', function() {
+      fetch('/admin/categories/' + this.value + '/subcategories')
+        .then((response) => {
+          return response.json();
+        })
+        .then((data) => {
+          if (data) {
+            let options = ''
+            for (let key in data) {
+              console.log(data[key])
+              let subcat = data[key]
+              options += `<option value=${subcat.id}>${subcat.title}</option>`
+            }
+
+            SubCategorySelect.innerHTML = options
+          }
+        });
+    })
+  }
 })
 
 Rails.start();

@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 Rails.application.routes.draw do
   devise_for :users
   root 'posts#index'
@@ -18,7 +19,11 @@ Rails.application.routes.draw do
 
     resources :users
     resources :posts
-    resources :categories
+    resources :categories do
+      member do
+        get :subcategories, defaults: { format: 'js' }
+      end
+    end
     resources :banners
     resources :teams
 

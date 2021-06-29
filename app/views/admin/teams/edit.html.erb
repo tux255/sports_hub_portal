@@ -1,3 +1,28 @@
 <% content_for(:add_item_button) { link_to 'Add Team', new_admin_team_path, class: 'btn btn-primary' } %>
+<div class="row py-3">
+  <div class="col-8">
+    map here
+  </div>
+  <div class="col-4">
+    <h3>New Team</h3>
+    <%= form_for [:admin,@team], html: {class:'border p-2 rounded-0'} do |f| %>
+      <div class="field-group mb-2">
+        <%= f.text_field :name, placeholder: 'Team Name', class:'form-control' %>
+      </div>
 
-edit
+      <div class="field-group mb-2">
+        <%= f.label :category %>
+        <%= f.select :category_id, options_for_select(Category.where(parent_id:nil).map{|t| [t.title, t.id]}), {}, {id:'categories_ignored',name:'',class:'custom-select'} %>
+      </div>
+
+      <div class="field-group mb-2">
+        <%= f.label :subcategory %>
+        <%= f.select :category_id, options_for_select(Category.all.map{|t| [t.title, t.id]}), {}, {class:'custom-select'} %>
+      </div>
+
+      <div class="field-group mb-2">
+        <%= f.submit 'Save', class:'btn btn-primary' %>
+      </div>
+    <% end %>
+  </div>
+</div>

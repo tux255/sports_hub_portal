@@ -4,7 +4,6 @@ module Admin
   class CategoriesController < Admin::BaseController
     def index
       @categories = Category.all
-      authorize @categories
     end
 
     def show
@@ -12,17 +11,14 @@ module Admin
       @title = category.title
 
       @posts = category.subcategory_posts
-      authorize category
     end
 
     def new
       @category = Category.new
-      authorize @category
     end
 
     def create
       @category = current_user.categories.new(category_params)
-      authorize @category
 
       if @category.save
         render 'index'
@@ -43,6 +39,12 @@ module Admin
       else
         render :edit
       end
+    end
+
+    def subcategories
+      @subcategories = Category.where(parent_id: params[:id])
+
+      render json: @subcategories
     end
 
     private

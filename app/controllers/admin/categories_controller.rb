@@ -19,7 +19,7 @@ module Admin
     end
 
     def create
-      @category = current_user.categories.new(category_params)
+      @category = Category.new(category_params)
 
       if @category.save
         render 'index'
@@ -34,7 +34,6 @@ module Admin
 
     def update
       category = Category.find(params[:id])
-      byebug
 
       if category.update(category_params)
         redirect_to edit_admin_category_path, notice: 'Category was successfully updated'

@@ -33,7 +33,7 @@ RSpec.describe 'Categories' do
     end
 
     it '#edit' do
-      category = admin.categories.create(FactoryBot.attributes_for(:category))
+      category = Category.create(FactoryBot.attributes_for(:category))
 
       expect(
         get(edit_admin_category_path(category))
@@ -41,15 +41,14 @@ RSpec.describe 'Categories' do
     end
 
     it '#update' do
-      parent_category = FactoryBot.create(:category, user_id: admin.id)
-      test_category = FactoryBot.create(:category, user_id: admin.id)
+      parent_category = FactoryBot.create(:category)
+      test_category = FactoryBot.create(:category)
 
       put "/admin/categories/#{test_category.id}",
           params: { category: { title: 'New title', parent_id: parent_category.id } }
 
       test_category.reload
 
-      expect(response).to render_template('edit')
       expect(test_category.title).to eql 'New title'
       expect(test_category.parent_id).to eql parent_category.id
     end

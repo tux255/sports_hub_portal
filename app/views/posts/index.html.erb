@@ -1,21 +1,8 @@
-<table class="table table-bordered table-striped table-condensed table-hover">
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Content</th>
-      <th>Category</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-
-  <tbody>
+<div class="row py-3">
+  <h2>Categories</h2>
+  <div class="col-12">
     <% @posts.each do |post| %>
-    <tr>
-      <td><%= post.title %></td>
-      <td><%= post.content %></td>
-      <td><%= post.category.title unless post.category.blank? %></td>
-      <td><%= link_to 'Show', post %></td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
+      <%= render partial: 'shared/post', locals: {post: post} %>
+    <% end unless @posts.blank?  %>
+  </div>
+</div>

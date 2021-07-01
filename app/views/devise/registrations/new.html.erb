@@ -9,13 +9,6 @@
       <div class="col my-auto sign-form-wrapper">
         <h4>Sign Up to Sports Hub</h4>
 
-        <div class="row d-flex flex-row pt-3">
-          <div class="col">
-            <a class='border rounded-circle p-1 border-dark fa fa-facebook text-decoration-none' href="#"></a>
-            <a class='border rounded-circle p-1 border-dark fa fa-google text-decoration-none' href="#"></a>
-          </div>
-        </div>
-
         <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
           <%= render "devise/shared/error_messages", resource: resource %>
 

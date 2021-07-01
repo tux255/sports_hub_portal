@@ -16,6 +16,9 @@
               <%= link_to admin_users_path do %>
                 <img src="https://dummyimage.com/48x48/c4c4c4/000000.jpg&text=avatar" alt="user avatar" class="rounded-circle mr-2">
                 <%= current_user.name %>
+                <span class="small">
+                  <%= current_user.role %>
+                </span>
               <% end %>
             </li>
             <li>

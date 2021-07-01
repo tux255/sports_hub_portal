@@ -13,8 +13,12 @@ require("bootstrap/dist/js/bootstrap")
 require("trix")
 require("@rails/actiontext")
 
+
+Rails.start();
+Turbolinks.start();
+ActiveStorage.start();
+
 window.addEventListener('turbolinks:load', function() {
-  console.log('content loaded');
   const addAnswerButton = document.querySelector('#addAnswerField');
   if (addAnswerButton) {
     window.answersCounter = document.querySelectorAll('[id^="survey_survey_answers_attributes_"').length;
@@ -53,7 +57,3 @@ window.addEventListener('turbolinks:load', function() {
     })
   }
 })
-
-Rails.start();
-Turbolinks.start();
-ActiveStorage.start();

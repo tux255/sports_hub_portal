@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
-class SurveyPolicy < ApplicationPolicy
+class Admin::SurveyPolicy < ApplicationPolicy
   def index?
-    true
+    user.admin?
   end
 
   def show
-    true
+    user.admin?
   end
 
   def new?
@@ -18,7 +18,7 @@ class SurveyPolicy < ApplicationPolicy
   end
 
   def vote?
-    true
+    user.admin?
   end
 
   def update?

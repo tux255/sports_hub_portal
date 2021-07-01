@@ -1,0 +1,18 @@
+<%= link_to post, class: 'row post my-3 border' do %>
+  <div class="col-3 p-0">
+    <%= unless post.image.blank?
+          image_tag post.image, class: 'img-fluid'
+        else
+          image_tag 'https://dummyimage.com/600x400/c4/444.jpg?text=placeholder%20600x400', class: 'img-fluid'
+        end %>
+  </div>
+  <div class="col-9 d-flex justify-content-center flex-column">
+    <h3>
+      <%= post.title %><br/>
+    </h3>
+    <div>
+      <%= post.content %>
+    </div>
+    <%= 'Category: ' + post.category.title if post.category %>
+  </div>
+<% end %>

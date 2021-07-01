@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_30_071128) do
+ActiveRecord::Schema.define(version: 2021_07_01_090453) do
 
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
@@ -67,7 +67,6 @@ ActiveRecord::Schema.define(version: 2021_06_30_071128) do
     t.integer "parent_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "user_id", null: false
     t.index ["parent_id"], name: "index_categories_on_parent_id"
   end
 
@@ -143,9 +142,7 @@ ActiveRecord::Schema.define(version: 2021_06_30_071128) do
   add_foreign_key "banners", "categories"
   add_foreign_key "banners", "users"
   add_foreign_key "categories", "categories", column: "parent_id"
-  add_foreign_key "comments", "comment", column: "parent_comment_id"
+  add_foreign_key "comments", "comments", column: "parent_comment_id"
   add_foreign_key "posts", "categories"
-  add_foreign_key "posts", "users"
   add_foreign_key "survey_answers", "surveys"
-  add_foreign_key "surveys", "users"
 end

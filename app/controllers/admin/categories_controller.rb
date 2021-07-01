@@ -1,26 +1,24 @@
+# frozen_string_literal: true
+
 module Admin
   class CategoriesController < Admin::BaseController
     def index
-      @categories = policy_scope(Category)
-      authorize @categories
+      @categories = Category.all
     end
 
     def show
       category = Category.find(params[:id])
+      @title = category.title
 
-      @posts = category.posts
-      @subcategories = category.subcategories.all
-      authorize category
+      @posts = category.subcategory_posts
     end
 
     def new
       @category = Category.new
-      authorize @category
     end
 
     def create
       @category = current_user.categories.new(category_params)
-      authorize @category
 
       if @category.save
         render 'index'
@@ -34,19 +32,25 @@ module Admin
     end
 
     def update
-      @category = current_user.categories.new(params[:post])
+      category = Category.find(params[:id])
 
-      if @category.save
-        redirect_to @category
+      if category.update(category_params)
+        redirect_to edit_admin_category_path, notice: 'Post was successfully updated'
       else
         render :edit
       end
     end
 
+    def subcategories
+      @subcategories = Category.where(parent_id: params[:id])
+
+      render json: @subcategories
+    end
+
     private
 
     def category_params
-      params.require(:categories).permit!
+      params.require(:category).permit(:title, :parent_id)
     end
   end
 end

@@ -1,0 +1,18 @@
+<% content_for(:add_item_button) { link_to 'Add Post', new_admin_post_path, class: 'btn btn-primary' } %>
+<p id="notice"><%= notice %></p>
+
+<p>
+  <%= image_tag @post.image, class: 'img-fluid' %>
+</p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @post.title %>
+</p>
+
+<p>
+  <strong>Body:</strong>
+  <%= @post.content %>
+</p>
+
+<%= link_to 'Back', posts_path %>

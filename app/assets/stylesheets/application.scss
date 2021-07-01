@@ -14,10 +14,10 @@
  *= require_self
  */
 
-$alizarin-crimson: #d72130;
-
 @import 'font-awesome';
 @import "bootstrap/scss/bootstrap";
+
+$alizarin-crimson: #d72130;
 
 .admin-side-nav {
   .fa {

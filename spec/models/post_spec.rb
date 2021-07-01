@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'rails_helper'
 
 RSpec.describe Post do
@@ -16,7 +17,7 @@ RSpec.describe Post do
     end
 
     it 'is not valid without body' do
-      expect(@admin.posts.new(FactoryBot.attributes_for(:post, :with_no_body)))
+      expect(@admin.posts.new(FactoryBot.attributes_for(:post, :with_no_content)))
         .to_not be_valid
     end
   end

@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'rails_helper'
 
 RSpec.describe Category do
@@ -46,7 +47,8 @@ RSpec.describe Category do
   context 'assign post to category' do
     it 'is assigned' do
       category = user.categories.new(title: Category)
-      post = category.posts.new(title: 'Post title', body: 'Post content', category_id: category.id, user_id: user.id)
+      post = category.posts.new(title: 'Post title', content: 'Post content', category_id: category.id,
+                                user_id: user.id)
       expect(post.save).to be_truthy
       expect(post.category_id).to eq(category.id)
     end

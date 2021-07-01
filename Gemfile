@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
@@ -39,6 +41,8 @@ group :development, :test do
   gem 'rails-controller-testing'
   gem 'rspec-rails', '~> 5.0.0'
   gem 'rubocop', '~> 1.15'
+  gem 'rubocop-performance', require: false
+  gem 'rubocop-rspec', require: true
 end
 
 group :development do
@@ -63,10 +67,9 @@ group :test do
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
-
 gem 'devise', '~> 4.8'
-
-gem 'pundit', '~> 2.1'
-
 gem 'font-awesome-rails', '~> 4.6', '>= 4.6.3.1'
+gem 'pundit', '~> 2.1'
+gem 'trix'
+gem 'trix-rails'
+gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]

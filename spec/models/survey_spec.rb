@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Survey do
@@ -5,91 +7,49 @@ RSpec.describe Survey do
     let(:user) { FactoryBot.create(:user, :admin) }
 
     it 'is valid with valid attributes' do
-      expect(user.surveys.new(
-               question: 'Question?',
-               start_date: Date.today,
-               end_date: Date.tomorrow,
-               survey_answers_attributes: {
-                 1 => { answer: 'Yes' },
-                 2 => { answer: 'No' }
-               }
-             )).to be_valid
+      expect(
+        FactoryBot.build(:survey, user_id: user.id)
+      ).to be_valid
     end
 
     it 'is not valid with one answer' do
-      expect(user.surveys.new(
-               question: 'Question?',
-               start_date: Date.today,
-               end_date: Date.tomorrow,
-               survey_answers_attributes: {
-                 1 => { answer: 'Yes' }
-               }
-             )).to_not be_valid
+      expect(
+        FactoryBot.build(:survey, :one_answer, user_id: user.id)
+      ).not_to be_valid
     end
 
     it 'is not valid without question' do
-      expect(user.surveys.new(
-               question: '',
-               start_date: Date.today,
-               end_date: Date.tomorrow,
-               survey_answers_attributes: {
-                 1 => { answer: 'Yes' },
-                 2 => { answer: 'No' }
-               }
-             )).to_not be_valid
+      expect(
+        FactoryBot.build(:survey, :no_question, user_id: user.id)
+      ).not_to be_valid
     end
 
     it 'is not valid without a start_date' do
-      expect(user.surveys.new(
-               question: 'Question?',
-               start_date: '',
-               end_date: Date.tomorrow,
-               survey_answers_attributes: {
-                 1 => { answer: 'Yes' },
-                 2 => { answer: 'No' }
-               }
-             )).to_not be_valid
+      expect(
+        FactoryBot.build(:survey, :no_start_date, user_id: user.id)
+      ).not_to be_valid
     end
 
     it 'is not valid without a end_date' do
-      expect(user.surveys.new(
-               question: 'Question?',
-               start_date: Date.today,
-               end_date: '',
-               survey_answers_attributes: {
-                 1 => { answer: 'Yes' },
-                 2 => { answer: 'No' }
-               }
-             )).to_not be_valid
+      expect(
+        FactoryBot.build(:survey, :no_end_date, user_id: user.id)
+      ).not_to be_valid
     end
 
     it 'is not valid if start_date is in the past' do
-      expect(user.surveys.new(
-               question: 'Question?',
-               start_date: Date.yesterday,
-               end_date: Date.tomorrow,
-               survey_answers_attributes: {
-                 1 => { answer: 'Yes' },
-                 2 => { answer: 'No' }
-               }
-             )).to_not be_valid
+      expect(
+        FactoryBot.build(:survey, :start_date_in_past, user_id: user.id)
+      ).not_to be_valid
     end
 
     it 'persisted' do
       question = 'what number?'
-      survey = user.surveys.new(
-        question: question,
-        start_date: Date.today,
-        end_date: Date.tomorrow,
-        survey_answers: [
-          FactoryBot.build(:survey_answer, answer: '1'),
-          FactoryBot.build(:survey_answer, answer: '2')
-        ]
-      )
+      survey = FactoryBot.build(:survey, question: question, user_id: user.id)
+
       expect(survey.save).to be_truthy
       expect(survey.user_id).to eq(user.id)
       expect(survey.question).to eq(question)
-      expect(survey.survey_answers.pluck(:answer).sort).to eq(%w[1 2])
+      expect(survey.survey_answers.pluck(:answer)).to eq(%w[Yes No])
     end
   end
 end

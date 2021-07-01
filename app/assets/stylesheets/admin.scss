@@ -1,0 +1,69 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+@import 'font-awesome';
+@import "bootstrap/scss/bootstrap";
+
+@import "./actiontext.scss";
+
+$alizarin-crimson: #d72130;
+
+.admin-side-nav {
+  .fa {
+    font-size: 2rem;
+    padding: 0.5rem 0;
+    color: #b2b2b2;
+  }
+}
+.navbar-header {
+  background-color: $alizarin-crimson;
+
+  & > a {
+    color: #ffffff;
+  }
+}
+.sign-form-wrapper {
+  max-width: 390px;
+}
+
+.btn-primary {
+  &:hover,
+  &:active,
+  &:visited {
+    background-color: $alizarin-crimson !important;
+    border-color: $alizarin-crimson;
+  }
+  background-color: $alizarin-crimson !important;
+  border-color: $alizarin-crimson;
+}
+.btn-outline-primary {
+  &:hover,
+  &:active,
+  &:visited {
+    border-color: $alizarin-crimson;
+    color: $alizarin-crimson;
+  }
+  border-color: $alizarin-crimson;
+  color: $alizarin-crimson;
+}
+
+.post {
+  &:hover {
+    background-color: $white;
+    box-shadow: 0 0.5rem 1rem #c4c4c4 !important;
+    text-decoration: none;
+  }
+}

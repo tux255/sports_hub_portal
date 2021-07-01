@@ -1,13 +1,22 @@
 <p id="notice"><%= notice %></p>
 
 <p>
+  <%= image_tag @post.image unless @post.image.blank? %>
+</p>
+
+<p>
   <strong>Title:</strong>
   <%= @post.title %>
 </p>
 
 <p>
+  <strong>Category:</strong>
+  <%= @post.category.title unless @post.category.blank? %>
+</p>
+
+<p>
   <strong>Body:</strong>
-  <%= @post.body %>
+  <%= @post.content %>
 </p>
 
 <%= link_to 'Back', posts_path %>

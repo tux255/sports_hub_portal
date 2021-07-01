@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 module Admin
   class PostsController < Admin::BaseController
     before_action :set_post, only: %i[show edit update destroy]
@@ -21,16 +22,8 @@ module Admin
     end
 
     # GET /posts/1/edit
-    def edit; end
-
-    def update
-      @post = Post.new(params[:post])
-
-      if Post.save
-        render 'index'
-      else
-        render 'edit'
-      end
+    def edit
+      @post = Post.find(params[:id])
     end
 
     # POST /posts
@@ -38,45 +31,36 @@ module Admin
       @post = current_user.posts.new(post_params)
       authorize @post
 
-      respond_to do |format|
-        if @post.save
-          format.html { redirect_to @post, notice: 'Post was successfully created' }
-        else
-          format.html { render :new }
-        end
+      if @post.save
+        redirect_to @post, notice: 'Post was successfully created'
+      else
+        render :new
       end
     end
 
     # PATCH/PUT /posts/1
     def update
-      respond_to do |format|
-        if @post.update(post_params)
-          format.html { redirect_to @post, notice: 'Post was successfully updated' }
-        else
-          format.html { render :edit }
-        end
+      if @post.update(post_params)
+        redirect_to %i[edit admin post], notice: 'Post was successfully updated' if @post.update(post_params)
+      else
+        redirect_to %i[edit admin post]
       end
     end
 
     # DELETE /posts/1
     def destroy
-      @post.destroy
-      respond_to do |format|
-        format.html { redirect_to posts_url, notice: 'Post was successfully deleted' }
-      end
+      redirect_to posts_url, notice: 'Post was successfully deleted' if @post.destroy
     end
 
     private
 
-    # Use callbacks to share common setup or constraints between actions.
     def set_post
       @post = Post.find(params[:id])
       authorize @post
     end
 
-    # Only allow a list of trusted parameters through.
     def post_params
-      params.require(:post).permit(:title, :body, :user_id)
+      params.require(:post).permit(:title, :body, :content, :user_id, :image)
     end
   end
 end

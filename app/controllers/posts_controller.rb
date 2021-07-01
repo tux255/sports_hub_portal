@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class PostsController < ApplicationController
   before_action :set_post, only: %i[show edit update destroy]
 
@@ -19,7 +20,15 @@ class PostsController < ApplicationController
   end
 
   # GET /posts/1/edit
-  def edit; end
+  def edit
+    post = Post.find(params[:id])
+
+    if post.save
+      redirect_to post
+    else
+      render :show
+    end
+  end
 
   # POST /posts
   def create

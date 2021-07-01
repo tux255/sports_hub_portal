@@ -1,1 +1,2 @@
-<%= @teams %>
+<% content_for(:add_item_button) { link_to 'Add Team', new_admin_team_path, class: 'btn btn-primary' } %>
+<%= @team %>

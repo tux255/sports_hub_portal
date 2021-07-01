@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class PostPolicy < ApplicationPolicy
   def index?
     true
@@ -8,21 +9,15 @@ class PostPolicy < ApplicationPolicy
   end
 
   def create?
-    user.present?
+    user.admin?
   end
 
   def update?
-    return true if user.present? && user == post.user
+    user.admin?
   end
 
   def destroy?
-    return true if user.present? && user == post.user
-  end
-
-  private
-
-  def post
-    record
+    user.admin?
   end
 
   class Scope

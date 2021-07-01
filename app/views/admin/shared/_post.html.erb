@@ -1,23 +1,28 @@
-<%= link_to edit_admin_post_path(post), class: 'col-8 p-2 mb-3 border d-flex post' do %>
-  <div class="row">
-    <div class="col-3">
-      <%= unless post.image.blank?
-           image_tag post.image, class: 'img-fluid'
-      else
-        image_tag 'https://dummyimage.com/600x400/c4/444.jpg?text=placeholder%20600x400', class: 'img-fluid'
-      end %>
+<div class="row post my-3 border">
+  <div class="col-3 p-0">
+    <%= unless post.image.blank?
+          image_tag post.image, class: 'img-fluid'
+        else
+          image_tag 'https://dummyimage.com/600x400/c4/444.jpg?text=placeholder%20600x400', class: 'img-fluid'
+        end %>
+  </div>
+  <div class="col-9 d-flex justify-content-center flex-column">
+    <h3>
+      <%= post.title %><br/>
+    </h3>
+    <div>
+      <%= post.content %>
     </div>
-    <div class="col-9">
-      <h3>
-        <%= post.title %><br/>
-      </h3>
-      <div>
-        <%= post.content %>
+    <div>
+      <%= 'Published: ' + post.published.to_s %>
+    </div>
+    <%= 'Category: ' + post.category.title if post.category %>
+    <div class="row">
+      <div class="col-12 mt-2">
+        <%= link_to 'Delete', admin_category_path, method: :delete, class: 'btn btn-outline-danger' %>
+        <%= link_to 'Edit', edit_admin_category_path, class: 'btn btn-outline-primary' %>
+        <%= link_to 'View', admin_post_path, class: 'btn btn-outline-secondary', target: '_blank' %>
       </div>
-      <div>
-        <%= 'Published: ' + post.published.to_s %>
-      </div>
-      <%= 'Category: ' + post.category.title %>
     </div>
   </div>
-<% end %>
+</div>

@@ -15,11 +15,11 @@
   </div>
 
   <div class="field-group mb-2">
-    <%= f.collection_select :parent_id, Category.top_level.all,:id,:title, include_blank: true  %>
+    <%= f.select :parent_id, options_from_collection_for_select(Category.top_level.where.not(id: params[:id]), 'id', 'title' ), {include_blank:'Choose parent'}, {class:'custom-select'} %>
   </div>
 
   <div class="field-group mb-2">
     <%= link_to 'Cancel', admin_categories_path, class: 'btn btn-outline-dark' %>
-    <%= f.submit 'Save', class: 'btn btn-success' %>
+    <%= f.submit 'Save', class: 'btn btn-outline-success' %>
   </div>
 <% end %>

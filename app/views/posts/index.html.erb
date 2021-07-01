@@ -2,8 +2,8 @@
   <thead>
     <tr>
       <th>Title</th>
-      <th>Body</th>
-      <th>Published</th>
+      <th>Content</th>
+      <th>Category</th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -12,8 +12,8 @@
     <% @posts.each do |post| %>
     <tr>
       <td><%= post.title %></td>
-      <td><%= post.body %></td>
-      <td><%= post.published %></td>
+      <td><%= post.content %></td>
+      <td><%= post.category.title unless post.category.blank? %></td>
       <td><%= link_to 'Show', post %></td>
     </tr>
     <% end %>

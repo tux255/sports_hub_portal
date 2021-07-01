@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Admin
   class UsersController < Admin::BaseController
     before_action :authenticate_user!
@@ -6,12 +7,12 @@ module Admin
 
     def index
       @users = User.all
-      authorize User
+      authorize @users
     end
 
     def show
       @users = User.all
-      authorize User
+      authorize @users
     end
 
     def update
@@ -34,14 +35,12 @@ module Admin
 
     def lock_access
       user = User.find(params[:id])
-      authorize user
       user.lock_access!({ send_instructions: false })
       redirect_to admin_users_path, notice: 'User locked.'
     end
 
     def unlock_access
       user = User.find(params[:id])
-      authorize user
       user.unlock_access!
       redirect_to admin_users_path, notice: 'User unlocked.'
     end

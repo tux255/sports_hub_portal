@@ -28,4 +28,8 @@ class SurveyPolicy < ApplicationPolicy
   def destroy?
     user.admin?
   end
+
+  def close?
+    user.admin?
+  end
 end

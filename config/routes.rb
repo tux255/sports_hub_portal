@@ -31,7 +31,7 @@ Rails.application.routes.draw do
     get 'footer' => 'footer#show'
     get 'social-networks' => 'social_networks#show'
     get 'users' => 'users#index'
-    get 'ia' => 'ia#show'
+    get 'ia' => 'ia#index'
     get 'partners-news' => 'partners_news#show'
     get 'advertising' => 'advertising#show'
 

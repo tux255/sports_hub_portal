@@ -17,7 +17,7 @@ RSpec.describe 'Posts', type: :request do
     end
 
     it '#show' do
-      post = user.posts.create(FactoryBot.attributes_for(:post))
+      post = Post.create(FactoryBot.attributes_for(:post))
 
       expect(
         get("/posts/#{post.id}")
@@ -33,7 +33,7 @@ RSpec.describe 'Posts', type: :request do
     it '#create' do
       expect do
         post('/admin/posts',
-             params: { post: FactoryBot.attributes_for(:post, user_id: user.id) })
+             params: { post: FactoryBot.attributes_for(:post) })
       end.to change { Post.all.size }.by(1)
     end
 
@@ -51,7 +51,6 @@ RSpec.describe 'Posts', type: :request do
       new_post = FactoryBot.create(:post, :with_image, title: 'post title', content: 'some content')
 
       expect(new_post).to be_valid
-      expect(new_post.user_id).to eq(user.id)
       expect(new_post.title).to eq(title)
       expect(new_post.content.to_plain_text).to eq(body)
       expect(new_post.image).to be_attached

@@ -47,7 +47,6 @@ RSpec.describe Survey do
       survey = FactoryBot.build(:survey, question: question, user_id: user.id)
 
       expect(survey.save).to be_truthy
-      expect(survey.user_id).to eq(user.id)
       expect(survey.question).to eq(question)
       expect(survey.survey_answers.pluck(:answer)).to eq(%w[Yes No])
     end

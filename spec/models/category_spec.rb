@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Category do
@@ -6,7 +7,7 @@ RSpec.describe Category do
 
   context 'when title is empty' do
     let(:no_title_category) do
-      user.categories.new(title: '')
+      Category.new(title: '')
     end
 
     it 'not valid' do
@@ -20,7 +21,7 @@ RSpec.describe Category do
 
   context 'when title present' do
     let(:valid_category) do
-      user.categories.new(title: 'Category title')
+      Category.new(title: 'Category title')
     end
 
     it 'valid' do
@@ -35,8 +36,8 @@ RSpec.describe Category do
   context 'when create subcategory' do
     it 'is created' do
       sub_title = 'Subcategory title'
-      cat = user.categories.create!(title: 'Main category')
-      subcat = cat.subcategories.new(title: sub_title, user_id: user.id)
+      cat = Category.create!(title: 'Main category')
+      subcat = cat.subcategories.new(title: sub_title)
 
       expect(subcat.save).to be_truthy
       expect(subcat.parent_id).to eq(cat.id)
@@ -46,7 +47,7 @@ RSpec.describe Category do
 
   context 'assign post to category' do
     it 'is assigned' do
-      category = user.categories.new(title: Category)
+      category = Category.new(title: 'Category')
       post = category.posts.new(title: 'Post title', content: 'Post content', category_id: category.id,
                                 user_id: user.id)
       expect(post.save).to be_truthy

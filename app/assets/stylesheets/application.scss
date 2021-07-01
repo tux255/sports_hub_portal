@@ -37,23 +37,23 @@ $alizarin-crimson: #d72130;
   max-width: 390px;
 }
 
-.btn-primary {
-  &:hover,
-  &:active,
-  &:visited {
-    background-color: $alizarin-crimson !important;
-    border-color: $alizarin-crimson;
-  }
-  background-color: $alizarin-crimson !important;
-  border-color: $alizarin-crimson;
-}
-.btn-outline-primary {
-  &:hover,
-  &:active,
-  &:visited {
-    border-color: $alizarin-crimson;
-    color: $alizarin-crimson;
-  }
-  border-color: $alizarin-crimson;
-  color: $alizarin-crimson;
-}
+// .btn-primary {
+//   &:hover,
+//   &:active,
+//   &:visited {
+//     background-color: $alizarin-crimson !important;
+//     border-color: $alizarin-crimson;
+//   }
+//   background-color: $alizarin-crimson !important;
+//   border-color: $alizarin-crimson;
+// }
+// .btn-outline-primary {
+//   &:hover,
+//   &:active,
+//   &:visited {
+//     border-color: $alizarin-crimson;
+//     color: $alizarin-crimson;
+//   }
+//   border-color: $alizarin-crimson;
+//   color: $alizarin-crimson;
+// }

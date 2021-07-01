@@ -5,18 +5,28 @@
     </div>
     <div id="navbar">
 
-    <ul class="nav navbar-nav pull-right">
-      <li><% link_to 'Home', root_path %></li>
       <ul class="nav navbar-nav pull-right flex-row">
         <% if user_signed_in? %>
-          <li><%= current_user.email %></li>
-          <li><%= link_to 'Log out', destroy_user_session_path, method: :delete, class:'btn btn-outline-primary' %></li>
-          <li><%= current_user.role %></li>
+          <li class="h6 align-items-center d-flex px-2 border rounded m-0 mr-2"><%= link_to admin_root_path do %>
+            <i class="fa fa-exchange" aria-hidden="true"></i>
+          <% end %>
+          </li>
+          <li class="h6 align-items-center d-flex px-2 border rounded m-0 mr-2">
+            <%= link_to admin_users_path do %>
+              <img src="https://dummyimage.com/48x48/c4c4c4/000000.jpg&text=avatar" alt="user avatar" class="rounded-circle mr-2">
+              <%= current_user.name %>
+              <span class="small">
+                <%= current_user.role %>
+              </span>
+            <% end %>
+          </li>
+          <li>
+            <%= link_to 'log out', destroy_user_session_path, method: :delete, class:'btn btn-outline-primary' %>
+          </li>
         <% else %>
-          <li><%= link_to 'Log In', new_user_session_path %></li>
-          <li><%= link_to 'Sign Up', new_user_registration_path %></li>
+          <li><%= link_to 'Log In', new_user_session_path, class: 'btn btn-outline-primary mr-2' %></li>
+          <li><%= link_to 'Sign Up', new_user_registration_path, class: 'btn btn-outline-primary mr-3' %></li>
         <% end %>
       </ul>
-    </ul>
-  </div>
+    </div>
 </nav>

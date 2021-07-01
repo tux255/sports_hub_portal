@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 class PostsController < ApplicationController
   before_action :set_post, only: %i[show edit update destroy]
 
@@ -32,35 +33,29 @@ class PostsController < ApplicationController
 
   # POST /posts
   def create
-    @post = current_user.posts.new(post_params)
+    @post = Post.new(post_params)
     authorize @post
 
-    respond_to do |format|
-      if @post.save
-        format.html { redirect_to @post, notice: 'Post was successfully created' }
-      else
-        format.html { render :new }
-      end
+    if @post.save
+      redirect_to @post, notice: 'Post was successfully created'
+    else
+      render :new
     end
   end
 
   # PATCH/PUT /posts/1
   def update
-    respond_to do |format|
-      if @post.update(post_params)
-        format.html { redirect_to @post, notice: 'Post was successfully updated' }
-      else
-        format.html { render :edit }
-      end
+    if @post.update(post_params)
+      redirect_to @post, notice: 'Post was successfully updated'
+    else
+      render :edit
     end
   end
 
   # DELETE /posts/1
   def destroy
     @post.destroy
-    respond_to do |format|
-      format.html { redirect_to posts_url, notice: 'Post was successfully deleted' }
-    end
+    redirect_to posts_url, notice: 'Post was successfully deleted'
   end
 
   private
@@ -73,6 +68,6 @@ class PostsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def post_params
-    params.require(:post).permit(:title, :body, :user_id)
+    params.require(:post).permit(:title, :body)
   end
 end

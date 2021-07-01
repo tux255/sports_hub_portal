@@ -1,12 +1,8 @@
 # frozen_string_literal: true
+
 class User < ApplicationRecord
   enum role: %i[user admin]
   after_initialize :set_default_role, if: :new_record?
-
-  has_many :posts
-  has_many :surveys
-  has_many :categories
-  has_many :banners
 
   # Include default devise modules. Others available are:
   # :confirmable, :timeoutable, :trackable and :omniauthable

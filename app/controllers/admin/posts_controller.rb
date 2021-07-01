@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module Admin
   class PostsController < Admin::BaseController
     before_action :set_post, only: %i[show edit update destroy]
@@ -28,7 +29,7 @@ module Admin
 
     # POST /posts
     def create
-      @post = current_user.posts.new(post_params)
+      @post = Post.new(post_params)
       authorize @post
 
       if @post.save
@@ -60,7 +61,7 @@ module Admin
     end
 
     def post_params
-      params.require(:post).permit(:title, :body, :content, :user_id, :image)
+      params.require(:post).permit(:title, :body, :content, :image)
     end
   end
 end

@@ -1,9 +1,10 @@
-<% content_for(:add_item_button) { link_to 'Add Post', new_admin_post_path, class: 'btn btn-primary' } %>
+<% content_for(:add_item_button) { link_to 'Add Category', new_admin_category_path, class: 'btn btn-outline-danger' } %>
+
 <div class="row py-3">
   <h2><%= @title %></h2>
   <div class="col-12">
     <% @posts.each do |post| %>
       <%= render partial: 'admin/shared/post', locals: {post: post} %>
-      <% end unless @posts.blank? %>
+    <% end %>
   </div>
 </div>

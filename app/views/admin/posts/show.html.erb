@@ -1,18 +1,13 @@
 <% content_for(:add_item_button) { link_to 'Add Post', new_admin_post_path, class: 'btn btn-primary' } %>
 <p id="notice"><%= notice %></p>
 
-<p>
-  <%= image_tag @post.image, class: 'img-fluid' %>
-</p>
-
-<p>
-  <strong>Title:</strong>
-  <%= @post.title %>
-</p>
-
-<p>
-  <strong>Body:</strong>
-  <%= @post.content %>
-</p>
-
-<%= link_to 'Back', posts_path %>
+<div class="row py-3">
+  <%= image_tag @post.image, class: 'img-fluid' unless @post.image.blank? %>
+  <div class="col-12">
+    <h2><%= @post.title %></h2>
+    <div class="border p-2 rounded-0 mb-2">
+      <%= @post.content %>
+    </div>
+    <%= link_to 'Back', admin_posts_path, class: 'btn btn-outline-secondary' %>
+  </div>
+</div>

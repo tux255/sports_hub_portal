@@ -10,6 +10,20 @@ module Admin
       @team = Team.find(params[:id])
     end
 
+    def edit
+      @team = Team.find(params[:id])
+    end
+
+    def update
+      @team = Team.find(params[:id])
+
+      if @team.save
+        render :edit, notice: 'Team successfully updated'
+      else
+        render :edit
+      end
+    end
+
     def new
       @team = Team.new
     end

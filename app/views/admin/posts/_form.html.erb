@@ -18,7 +18,9 @@
 
       <div class="field">
         <%= f.label :Category %>
-        <%= f.collection_select :category_id, Category.all, :id,:title, include_blank: true %>
+        <%= f.grouped_collection_select(:category_id, Category.top_level,
+                                        :subcategories, :title, :id, :title,
+                                        include_blank: "Please Choose...") %>
       </div>
 
       <div class="field">

@@ -1,7 +1,15 @@
 # frozen_string_literal: true
 
-class Admin::UserPolicy < ApplicationPolicy
+class Admin::PostPolicy < ApplicationPolicy
   def index?
+    user.admin?
+  end
+
+  def show?
+    user.admin?
+  end
+
+  def create?
     user.admin?
   end
 
@@ -13,26 +21,22 @@ class Admin::UserPolicy < ApplicationPolicy
     user.admin?
   end
 
-  def show?
-    user.admin?
-  end
-
-  def lock_access?
-    user.admin?
-  end
-
-  def unlock_access?
-    user.admin?
-  end
-
   class Scope
     def initialize(user, scope)
-      @user = user
+      @user  = user
       @scope = scope
     end
 
     def resolve
-      scope.all
+      if user.try(:admin?)
+        scope.all
+      else
+        scope.where(published: true)
+      end
     end
+
+    private
+
+    attr_reader :user, :scope
   end
 end

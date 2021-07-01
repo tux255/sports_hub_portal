@@ -4,6 +4,7 @@ module Admin
   class CategoriesController < Admin::BaseController
     def index
       @categories = Category.all
+      @posts = Post.where(category_id: nil)
     end
 
     def show
@@ -18,7 +19,7 @@ module Admin
     end
 
     def create
-      @category = current_user.categories.new(category_params)
+      @category = Category.new(category_params)
 
       if @category.save
         render 'index'
@@ -35,7 +36,7 @@ module Admin
       category = Category.find(params[:id])
 
       if category.update(category_params)
-        redirect_to edit_admin_category_path, notice: 'Post was successfully updated'
+        redirect_to edit_admin_category_path, notice: 'Category was successfully updated'
       else
         render :edit
       end

@@ -12,18 +12,5 @@ FactoryBot.define do
         fixture_file_upload('test-600x400.png', 'image/png')
       end
     end
-
-    trait :with_no_content do
-      content { '' }
-    end
-
-    trait :with_no_title do
-      title { '' }
-    end
-
-    trait :with_no_content_and_title do
-      title { '' }
-      content { '' }
-    end
   end
 end
